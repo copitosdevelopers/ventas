@@ -20,3 +20,9 @@ Route::post('categoria/crear','CategoriaController@crearCategorias');
 Route::put('categoria/actualizar/{id}','CategoriaController@actualizarCategorias');
 Route::put('categoria/desactivar/{id}','CategoriaController@desactivarCategoria');
 Route::put('categoria/activar/{id}','CategoriaController@activarCategoria');
+
+Route::get('personas/listar','PersonasController@listarPersonas');
+Route::post('personas/crear','PersonasController@crearPersonas');
+Route::put('personas/actualizar/{id}','PersonasController@actualizarPersonas');
+Route::put('personas/desactivar/{id}','PersonasController@desactivarPersonas');
+Route::put('personas/activar/{id}','PersonasController@activarPersonas');

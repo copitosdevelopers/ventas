@@ -14,6 +14,11 @@ export default new Router({
             path: '/administrar/categoria',
             name: 'administrarCategoria',
             component: require('./views/Categoria')
+        },
+        {
+            path: '/administrar/personas',
+            name: 'administrarPersonas', 
+            component: require('./views/Personas')
         }
     ]
 })

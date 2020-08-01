@@ -24,6 +24,12 @@
             </router-link>
           </li>
           <li class="nav-item">
+            <router-link :to="{name:'administrarPersonas'}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Personas</p>
+            </router-link>
+          </li>
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>Inactive Page</p>
