@@ -26,3 +26,10 @@ Route::post('personas/crear','PersonasController@crearPersonas');
 Route::put('personas/actualizar/{id}','PersonasController@actualizarPersonas');
 Route::put('personas/desactivar/{id}','PersonasController@desactivarPersonas');
 Route::put('personas/activar/{id}','PersonasController@activarPersonas');
+
+
+Route::get('proveedores/listar','ProveedoresController@listarProveedores');
+Route::post('proveedores/crear','ProveedoresController@crearProveedor');
+Route::put('proveedores/actualizar/{id}','ProveedoresController@actualizarProveedor');
+Route::put('proveedores/desactivar/{id}','ProveedoresController@desactivarProveedor');
+Route::put('proveedores/activar/{id}','ProveedoresController@activarProveedor');

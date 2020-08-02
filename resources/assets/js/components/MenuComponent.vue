@@ -30,10 +30,10 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+              <router-link :to="{name:'administrarProveedores'}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>Inactive Page</p>
-            </a>
+              <p>Proveedores</p>
+             </router-link>
           </li>
         </ul>
       </li>

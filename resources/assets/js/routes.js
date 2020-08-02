@@ -19,6 +19,11 @@ export default new Router({
             path: '/administrar/personas',
             name: 'administrarPersonas', 
             component: require('./views/Personas')
+        },
+        {
+            path: '/administrar/proveedores',
+            name: 'administrarProveedores', 
+            component: require('./views/Proveedor')
         }
     ]
 })
