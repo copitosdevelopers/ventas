@@ -41,11 +41,24 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
+            //Conection hosting db4free.net
+            /* 'host' => env('DB_HOST', 'db4free.net'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'database' => env('DB_DATABASE', 'cdventas'),
+            'username' => env('DB_USERNAME', 'copitosdev'),
+            'password' => env('DB_PASSWORD', 'dbDevel0p$2020'), */
+            //Connection hsting hostbuddy
+            'host' => env('DB_HOST', 'MYSQL5006.site4now.net'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'db_a655ae_ventas'),
+            'username' => env('DB_USERNAME', 'a655ae_ventas'),
+            'password' => env('DB_PASSWORD', 'CDVTAS220'),
+            //Connection default
+            /* 'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'ventas'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''), */
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
