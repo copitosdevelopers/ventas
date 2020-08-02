@@ -32,3 +32,8 @@ Route::post('articulo/crear','ArticuloController@crearArticulo');
 Route::put('articulo/actualizar/{id}','ArticuloController@actualizarArticulo');
 Route::put('articulo/desactivar/{id}','ArticuloController@desactivarArticulo');
 Route::put('articulo/activar/{id}','ArticuloController@activarArticulo');
+
+Route::get('rol/listar','RolController@listarRols');
+Route::post('rol/crear','RolController@crearRol');
+Route::put('rol/actualizar/{id}','RolController@actualizarRol');
+Route::put('rol/cambiarEstadoRol/{id}','RolController@cambiarEstadoRol');
