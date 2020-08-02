@@ -33,3 +33,14 @@ Route::post('proveedores/crear','ProveedoresController@crearProveedor');
 Route::put('proveedores/actualizar/{id}','ProveedoresController@actualizarProveedor');
 Route::put('proveedores/desactivar/{id}','ProveedoresController@desactivarProveedor');
 Route::put('proveedores/activar/{id}','ProveedoresController@activarProveedor');
+
+Route::get('articulo/listar','ArticuloController@listarArticulo');
+Route::post('articulo/crear','ArticuloController@crearArticulo');
+Route::put('articulo/actualizar/{id}','ArticuloController@actualizarArticulo');
+Route::put('articulo/desactivar/{id}','ArticuloController@desactivarArticulo');
+Route::put('articulo/activar/{id}','ArticuloController@activarArticulo');
+
+Route::get('rol/listar','RolController@listarRols');
+Route::post('rol/crear','RolController@crearRol');
+Route::put('rol/actualizar/{id}','RolController@actualizarRol');
+Route::put('rol/cambiarEstadoRol/{id}','RolController@cambiarEstadoRol');

@@ -29,11 +29,34 @@
               <p>Personas</p>
             </router-link>
           </li>
+          <li class="nav-item">             
+            <router-link :to="{name:'administrarArticulos'}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Articulos</p>
+            </router-link>
+          </li>
           <li class="nav-item">
-              <router-link :to="{name:'administrarProveedores'}" class="nav-link">
+             <router-link :to="{name:'administrarProveedores'}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>Proveedores</p>
              </router-link>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item ">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-tachometer-alt"></i>
+          <p>
+            Gestion de Usuarios
+            <i class="right fas fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <router-link :to="{name:'administrarRoles'}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Roles</p>
+            </router-link>
           </li>
         </ul>
       </li>

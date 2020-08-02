@@ -24,6 +24,16 @@ export default new Router({
             path: '/administrar/proveedores',
             name: 'administrarProveedores', 
             component: require('./views/Proveedor')
+        },
+        {
+            path: '/administrar/articulo',
+            name: 'administrarArticulos', 
+            component: require('./views/Articulo')
+        },
+        {
+            path: '/administrar/roles',
+            name: 'administrarRoles', 
+            component: require('./views/Rol')
         }
     ]
 })
