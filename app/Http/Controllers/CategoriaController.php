@@ -20,7 +20,7 @@ class CategoriaController extends Controller
         $categoria = new Categoria();
         $categoria->nombre = $request->nombre;
         $categoria->descripcion = $request->descripcion;
-        $categoria->usuario = $request->usuario;
+        $categoria->usuario = "1";
         $categoria->estado = "1";
         $categoria->save();
         return $categoria;

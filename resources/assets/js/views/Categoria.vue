@@ -96,7 +96,9 @@ export default {
             id_categoria:'',
             titulo_modal : '',
             titulo_accion:'',
-            accion:''
+            accion:'',
+            errorCategoria: 0,
+            errorMsjCategoria: []
         }
     }, 
     methods : {
@@ -109,22 +111,62 @@ export default {
             .catch(error=>console.log(error))
         },
         desactivarCategoria(id){
+          Vue.swal({
+                    title: 'Estas seguro de desactivar esta Categoria?',
+                    //text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si Desactivar!'
+                    }).then((result) => {
+                      if (result.value) {
             let url ='categoria/desactivar/';
             axios.put(url+id)
             .then(respose=>{
                 this.listarCategoria();
+                Vue.swal(
+                        'Desactivada',
+                        'Categoria Desactivada con Exito',
+                        'success'
+                     )
             })
             .catch(error=>console.log(error))
+                }
+            })
         },
         activarCategoria(id){
+          Vue.swal({
+                    title: 'Estas seguro de activar esta Categoria?',
+                    //text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si Activar!'
+                    }).then((result) => {
+                      if (result.value) {
             let url ='categoria/activar/';
             axios.put(url+id)
             .then(respose=>{
+              Vue.swal(
+                        'Activado',
+                        'Categoria Activada con Exito',
+                        'success'
+                     )
                 this.listarCategoria();
             })
             .catch(error=>console.log(error))
+             }
+          })
         },
         nuevaCategoria(){
+
+         
+          /*if(this.validarCategoria()){
+            return;
+             
+           }*/  
             let url ='categoria/crear';
             axios.post(url,{
                 'nombre' : this.nombre,
@@ -134,11 +176,24 @@ export default {
             .then(response=>{
                 this.listarCategoria();
                 this.nombre='',
-                this.descripcion=''            
+                this.descripcion='' 
+                this.validarCategoria();           
             })
             .catch(error=>console.log(error));
         },
+        /*validarCategoria(){
+          let app = this;
+          this.errorCategoria=0;
+          this.errorMsjCategoria = [];
+          
+          if(!this.nombre)
+            this.errorMsjCategoria.push("El nombres es obligatorio");
+            this.errorCategoria=1;
+            console.log(this.errorCategoria);
+          return app.errorCategoria;
+        },*/
         actualizarCategoria(){
+            
             let url ='categoria/actualizar/';
             axios.put(url+this.id_categoria,{
                 'nombre' : this.nombre,
@@ -146,11 +201,17 @@ export default {
                 'usuario': this.usuario
             })
             .then(response=>{
+              Vue.swal(
+                               'Actualizado',
+                               'Categoria Actualizado con Exito',
+                               'success'
+                           )
                 this.listarCategoria();
                 this.nombre='',
                 this.descripcion=''            
             })
             .catch(error=>console.log(error));
+             
         },
         abrirModal(titulo, accion , data = []){
             switch(titulo){
