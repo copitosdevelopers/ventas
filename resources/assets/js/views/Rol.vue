@@ -1,8 +1,7 @@
 <template>
   <div class="card mt-2" >
               <div class="card-header">
-                <h3 class="card-title">Listado de Roles 
-                    </h3>
+                <h3 class="card-title">Listado de Roles</h3>
                     <button type="button" class="btn btn-outline-primary btn-sm float-right" data-toggle="modal" data-target="#modal-default" @click="abrirModal('crear', '')">
                             <i class="fas fa-plus"></i> Nuevo
                     </button>
@@ -27,19 +26,19 @@
                       <td>{{rol.slug}}</td>   
                       <td>{{rol.descripcion}}</td>                  
                       <td>
-                          <span v-if="rol.estado == '1'" class="badge bg-success">Activo &nbsp;&nbsp;</span>
+                          <span v-if="rol.estado == '1'" class="badge bg-success">&nbsp;Activo &nbsp;&nbsp;</span>
                           <span v-else class="badge bg-danger">Inactivo</span>
                       </td>
                       <td>
                           <div class="btn-group">
-                              <button class="btn btn-secondary" data-toggle="modal" data-target="#modal-default" @click="abrirModal('actualizar', rol)">
+                              <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modal-default" @click="abrirModal('actualizar', rol)">
                                   <i class="fa fa-edit"></i> 
                                   Editar
                               </button>
-                              <button :class="rol.estado == '1' ? 'btn-danger' : 'btn-success'" class="btn" @click="cambiarEstadoRol(rol.id, rol.estado)">
+                              <button :class="rol.estado == '1' ? 'btn-danger' : 'btn-success'" class="btn btn-sm" @click="cambiarEstadoRol(rol.id, rol.estado)">
                                   <i :class="rol.estado == '1' ? 'fa-times' : 'fa-check'" class="fa"></i> 
                                   <span v-if="rol.estado == '1'">Desactivar</span>
-                                  <span v-else>Activar</span>
+                                  <span v-else>&nbsp;&nbsp;&nbsp;Activar&nbsp;&nbsp;&nbsp;</span>
                               </button>
                           </div>
                       </td>
@@ -163,64 +162,32 @@ export default {
         cambiarEstadoRol(id, estado){
             let app = this;
             let url ='rol/cambiarEstadoRol/'+id;
+          
+            Vue.swal({
+                html: (estado == '1') ? '<h5>¿Estas seguro de desactivar este rol?</h5>' : '<h5>¿Estas seguro de activar este rol?</h5>',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: (estado == '1') ? 'Si Desactivar!' : 'Si Activar!'
+                }).then((result) => {
+                if (result.value) {
 
-            if(estado == '1'){
-
-                Vue.swal({
-                html: '<h5>¿Estas seguro de desactivar este rol?</h5>',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si Desactivar!'
-                    }).then((result) => {
-                    if (result.value) {
-
-                        axios.put(url)
-                        .then(response => {
-                            Vue.swal({
-                                position: 'top-end',
-                                icon: 'success',
-                                html: '<h6>Rol desactivado</h6>',
-                                showConfirmButton: false,
-                                timer: 1500
-                            })
-                            app.listarRols();
-                        })
-                        .catch(error => console.log(error)) 
-                    
-                    }
-                })
-
-            }else{
-
-                Vue.swal({
-                 html: '<h5>¿Estas seguro de activar este rol?</h5>',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si Activar!'
-                    }).then((result) => {
-                    if (result.value) {
-
-                        axios.put(url)
-                        .then(response => {
-                            Vue.swal({
+                    axios.put(url)
+                    .then(response => {
+                        Vue.swal({
                             position: 'top-end',
                             icon: 'success',
-                            html: '<h6>Rol activado</h6>',
+                            html: (estado == '1') ? '<h6>Rol desactivado</h6>' : '<h6>Rol activado</h6>',
                             showConfirmButton: false,
                             timer: 1500
-                            })
-                            app.listarRols();
                         })
-                        .catch(error => console.log(error)) 
-                    
-                    }
-                })
-
-            }
+                        app.listarRols();
+                    })
+                    .catch(error => console.log(error)) 
+                
+                }
+            })
             
         }
     }

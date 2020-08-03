@@ -49090,7 +49090,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -49217,6 +49217,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
@@ -49240,6 +49249,26 @@ var render = function() {
         }
       },
       [
+        _c(
+          "li",
+          { staticClass: "nav-item " },
+          [
+            _c(
+              "router-link",
+              { staticClass: "nav-link", attrs: { to: { name: "dashboard" } } },
+              [
+                _c("i", { staticClass: "nav-icon fas fa-tachometer-alt" }),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v("\n          Dashboard\n          "),
+                  _c("i", { staticClass: "right fas fa-angle-left" })
+                ])
+              ]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
         _c("li", { staticClass: "nav-item " }, [
           _vm._m(0),
           _vm._v(" "),
@@ -52504,15 +52533,20 @@ if (inBrowser && window.Vue) {
 /* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(85)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(87)
 /* template */
-var __vue_template__ = null
+var __vue_template__ = __webpack_require__(88)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -52526,6 +52560,22 @@ var Component = normalizeComponent(
   __vue_module_identifier__
 )
 Component.options.__file = "resources/assets/js/views/Dashboard.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-361a3c51", Component.options)
+  } else {
+    hotAPI.reload("data-v-361a3c51", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
 
 module.exports = Component.exports
 
@@ -55503,7 +55553,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
@@ -55578,59 +55627,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var app = this;
             var url = 'rol/cambiarEstadoRol/' + id;
 
-            if (estado == '1') {
+            Vue.swal({
+                html: estado == '1' ? '<h5>¿Estas seguro de desactivar este rol?</h5>' : '<h5>¿Estas seguro de activar este rol?</h5>',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: estado == '1' ? 'Si Desactivar!' : 'Si Activar!'
+            }).then(function (result) {
+                if (result.value) {
 
-                Vue.swal({
-                    html: '<h5>¿Estas seguro de desactivar este rol?</h5>',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si Desactivar!'
-                }).then(function (result) {
-                    if (result.value) {
-
-                        axios.put(url).then(function (response) {
-                            Vue.swal({
-                                position: 'top-end',
-                                icon: 'success',
-                                html: '<h6>Rol desactivado</h6>',
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                            app.listarRols();
-                        }).catch(function (error) {
-                            return console.log(error);
+                    axios.put(url).then(function (response) {
+                        Vue.swal({
+                            position: 'top-end',
+                            icon: 'success',
+                            html: estado == '1' ? '<h6>Rol desactivado</h6>' : '<h6>Rol activado</h6>',
+                            showConfirmButton: false,
+                            timer: 1500
                         });
-                    }
-                });
-            } else {
-
-                Vue.swal({
-                    html: '<h5>¿Estas seguro de activar este rol?</h5>',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si Activar!'
-                }).then(function (result) {
-                    if (result.value) {
-
-                        axios.put(url).then(function (response) {
-                            Vue.swal({
-                                position: 'top-end',
-                                icon: 'success',
-                                html: '<h6>Rol activado</h6>',
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                            app.listarRols();
-                        }).catch(function (error) {
-                            return console.log(error);
-                        });
-                    }
-                });
-            }
+                        app.listarRols();
+                    }).catch(function (error) {
+                        return console.log(error);
+                    });
+                }
+            });
         }
     }
 });
@@ -55645,9 +55665,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card mt-2" }, [
     _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [
-        _vm._v("Listado de Roles \n                  ")
-      ]),
+      _c("h3", { staticClass: "card-title" }, [_vm._v("Listado de Roles")]),
       _vm._v(" "),
       _c(
         "button",
@@ -55690,7 +55708,7 @@ var render = function() {
               _c("td", [
                 rol.estado == "1"
                   ? _c("span", { staticClass: "badge bg-success" }, [
-                      _vm._v("Activo   ")
+                      _vm._v(" Activo   ")
                     ])
                   : _c("span", { staticClass: "badge bg-danger" }, [
                       _vm._v("Inactivo")
@@ -55702,7 +55720,7 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-secondary",
+                      staticClass: "btn btn-secondary btn-sm",
                       attrs: {
                         "data-toggle": "modal",
                         "data-target": "#modal-default"
@@ -55724,7 +55742,7 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "btn",
+                      staticClass: "btn btn-sm",
                       class: rol.estado == "1" ? "btn-danger" : "btn-success",
                       on: {
                         click: function($event) {
@@ -55740,7 +55758,7 @@ var render = function() {
                       _vm._v(" "),
                       rol.estado == "1"
                         ? _c("span", [_vm._v("Desactivar")])
-                        : _c("span", [_vm._v("Activar")])
+                        : _c("span", [_vm._v("   Activar   ")])
                     ]
                   )
                 ])
@@ -56932,6 +56950,239 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 78 */,
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */,
+/* 84 */,
+/* 85 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(86);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(12)("642bee4e", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-361a3c51\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Dashboard.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-361a3c51\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Dashboard.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 87 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mt-3" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-lg-3 col-6" }, [
+          _c("div", { staticClass: "small-box bg-info" }, [
+            _c("div", { staticClass: "inner" }, [
+              _c("h3", [_vm._v("150")]),
+              _vm._v(" "),
+              _c("p", [_vm._v("New Orders")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "icon" }, [
+              _c("i", { staticClass: "ion ion-bag" })
+            ]),
+            _vm._v(" "),
+            _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
+              _vm._v("More info "),
+              _c("i", { staticClass: "fas fa-arrow-circle-right" })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-3 col-6" }, [
+          _c("div", { staticClass: "small-box bg-success" }, [
+            _c("div", { staticClass: "inner" }, [
+              _c("h3", [
+                _vm._v("53"),
+                _c("sup", { staticStyle: { "font-size": "20px" } }, [
+                  _vm._v("%")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("p", [_vm._v("Bounce Rate")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "icon" }, [
+              _c("i", { staticClass: "ion ion-stats-bars" })
+            ]),
+            _vm._v(" "),
+            _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
+              _vm._v("More info "),
+              _c("i", { staticClass: "fas fa-arrow-circle-right" })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-3 col-6" }, [
+          _c("div", { staticClass: "small-box bg-warning" }, [
+            _c("div", { staticClass: "inner" }, [
+              _c("h3", [_vm._v("44")]),
+              _vm._v(" "),
+              _c("p", [_vm._v("User Registrations")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "icon" }, [
+              _c("i", { staticClass: "ion ion-person-add" })
+            ]),
+            _vm._v(" "),
+            _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
+              _vm._v("More info "),
+              _c("i", { staticClass: "fas fa-arrow-circle-right" })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-3 col-6" }, [
+          _c("div", { staticClass: "small-box bg-danger" }, [
+            _c("div", { staticClass: "inner" }, [
+              _c("h3", [_vm._v("65")]),
+              _vm._v(" "),
+              _c("p", [_vm._v("Unique Visitors")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "icon" }, [
+              _c("i", { staticClass: "ion ion-pie-graph" })
+            ]),
+            _vm._v(" "),
+            _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
+              _vm._v("More info "),
+              _c("i", { staticClass: "fas fa-arrow-circle-right" })
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-361a3c51", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
