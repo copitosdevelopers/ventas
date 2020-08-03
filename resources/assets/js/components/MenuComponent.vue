@@ -59,6 +59,14 @@
             </router-link>
           </li>
         </ul>
+         <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <router-link :to="{name:'administrarUsuario'}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Usuarios</p>
+            </router-link>
+          </li>
+        </ul>
       </li>
       <li class="nav-item">
         <a href="#" class="nav-link">
