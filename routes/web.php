@@ -44,3 +44,6 @@ Route::get('rol/listar','RolController@listarRols');
 Route::post('rol/crear','RolController@crearRol');
 Route::put('rol/actualizar/{id}','RolController@actualizarRol');
 Route::put('rol/cambiarEstadoRol/{id}','RolController@cambiarEstadoRol');
+
+
+Route::get('usuario/listar','UserController@listarUsuarios');
