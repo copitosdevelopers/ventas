@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/main', function () {
     return view('app');
-});
+})->name('main');
 
 Route::get('categoria/listar','CategoriaController@listarCategorias');
 Route::post('categoria/crear','CategoriaController@crearCategorias');
@@ -47,3 +47,12 @@ Route::put('rol/cambiarEstadoRol/{id}','RolController@cambiarEstadoRol');
 
 
 Route::get('usuario/listar','UserController@listarUsuarios');
+Route::post('usuario/registrar','UserController@store'); 
+Route::put('usuario/actualizar/{id}','UserController@actualizarUser');
+Route::put('usuario/activar/{id}','UserController@activarUsuario');
+Route::put('usuario/desactivar/{id}','UserController@desactivarUsuario');
+
+Route::get('/','Auth\LoginController@showLoginForm');
+Route::post('/login','Auth\LoginController@login')->name('login');
+
+Route::get('/home', 'HomeController@index')->name('home');

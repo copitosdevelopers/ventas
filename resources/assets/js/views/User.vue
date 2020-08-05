@@ -3,7 +3,7 @@
               <div class="card-header">
                 <h3 class="card-title">Lista de Usuarios 
                     </h3>
-                    <button type="button" class="btn btn-outline-primary btn-sm float-right" data-toggle="modal" data-target="#modal-lg" @click="abrirModal('proveedor','nuevo')">
+                    <button type="button" class="btn btn-outline-primary btn-sm float-right" data-toggle="modal" data-target="#modal-lg" @click="abrirModal('usuario','nuevo')">
                               Nuevo <i class="fas fa-plus"></i>
                     </button>
               </div>
@@ -46,17 +46,18 @@
                           <span v-else class="badge bg-danger">Inactivo</span>
                       </td>
                       <td>
-                            <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#modal-lg" @click="abrirModal('proveedor','actualizar',usuario)">
+                            <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#modal-lg" @click="abrirModal('usuario','actualizar',usuario)">
                               Editar <i class="fas fa-edit"></i>
                             </button>
-                            <button v-if="usuario.estado==1" type="button" class="btn btn-outline-danger btn-sm" @click="desactivarProveedor(usuario.id)">
+                            <button v-if="usuario.estado==1" type="button" class="btn btn-outline-danger btn-sm" @click="desactivarUsuario(usuario.id)">
                               Desactivar  <i class="fas fa-times"></i> 
                             </button>
-                            <button v-else type="button" class="btn btn-outline-success btn-sm" @click="activarProveedor(usuario.id)">
+                            <button v-else type="button" class="btn btn-outline-success btn-sm" @click="activarUsuario(usuario.id)">
                               Activar <i class="fas fa-check"></i>
                             </button>
                       </td>
                     </tr>
+                  
                     
                   </tbody>
                 </table>
@@ -114,6 +115,18 @@
                       <input v-model="correo" type="text" class="form-control" id="inputPassword3" placeholder="Email">
                     </div>
                   </div>
+
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Rol</label>
+                    <div class="col-sm-10">
+                      <select name="" id="" class="form-control" v-model="idrol">
+                          <option value="0">Seleccione un Rol</option>p    
+                          <option v-for="rol in arrayRol" :key="rol.id" :value="rol.id">{{rol.nombre}}</option>
+                     </select>
+                    </div>
+                  
+                  </div>
+
                   <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Telefono</label>
                     <div class="col-sm-10">
@@ -121,26 +134,25 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Contacto</label>
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Usuario</label>
                     <div class="col-sm-10">
-                      <input v-model="contacto" type="text" class="form-control" id="inputPassword3" placeholder="contacto">
+                      <input v-model="usuario" type="text" class="form-control" id="inputPassword3" placeholder="Telefono">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Telefono Contacto</label>
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
                     <div class="col-sm-10">
-                      <input v-model="telefono_contacto" type="number" class="form-control" id="inputPassword3" placeholder="Telefono">
+                      <input v-model="password" required type="password" class="form-control" id="inputPassword3" placeholder="password">
                     </div>
                   </div>
-                  
                 </div>
                 
               </form>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-              <button v-if="accion==1" type="button" class="btn btn-primary" data-dismiss="modal" @click="nuevoProveedor()">{{titulo_accion}}</button>
-              <button v-else type="button" class="btn btn-primary" data-dismiss="modal" @click="actualizarProveedor()">{{titulo_accion}}</button>
+              <button v-if="accion==1" type="button" class="btn btn-primary" data-dismiss="modal" @click="nuevoUsuario()">{{titulo_accion}}</button>
+              <button v-else type="button" class="btn btn-primary" data-dismiss="modal" @click="actualizarUsuario()">{{titulo_accion}}</button>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -154,11 +166,16 @@
 export default {
     mounted (){
         this.listarUsuarios();
+        this.listarRoles();
     },
     data(){
         return {
-            id_proveedor:'',
+            idrol:'',
+            usuario: '',
+            password :'',
+            id_usuario:'',
             usuariosArray : [],
+            arrayRol :[],  
             nombres :'',
             apellidos :'',
             tipo_documento: 1,
@@ -166,8 +183,6 @@ export default {
             direccion:'',
             correo:'',
             telefono:'',
-            contacto:'',
-            telefono_contacto:'',
             titulo_modal : '',
             titulo_accion:'',
             accion:'',
@@ -184,9 +199,9 @@ export default {
             })
             .catch(error=>console.log(error))
         },
-        desactivarProveedor(id){
+        desactivarUsuario(id){
           Vue.swal({
-                    title: 'Estas seguro de desactivar este Proveedor?',
+                    title: 'Estas seguro de desactivar este Usuario?',
                     //text: "You won't be able to revert this!",
                     icon: 'warning',
                     showCancelButton: true,
@@ -195,13 +210,13 @@ export default {
                     confirmButtonText: 'Si Desactivar!'
                     }).then((result) => {
                       if (result.value) {
-            let url ='proveedores/desactivar/';
+            let url ='usuario/desactivar/';
             axios.put(url+id)
             .then(respose=>{
-                this.listarProveedores();
+                this.listarUsuarios();
                 Vue.swal(
-                        'Desactivada',
-                        'Proveedor Desactivado con Exito',
+                        'Desactivado',
+                        'Usuario Desactivado con Exito',
                         'success'
                      )
             })
@@ -209,9 +224,9 @@ export default {
                 }
             })
         },
-        activarProveedor(id){
+        activarUsuario(id){
           Vue.swal({
-                    title: 'Estas seguro de activar este Proveedor?',
+                    title: 'Estas seguro de activar este Usuario?',
                     //text: "You won't be able to revert this!",
                     icon: 'warning',
                     showCancelButton: true,
@@ -220,22 +235,31 @@ export default {
                     confirmButtonText: 'Si Activar!'
                     }).then((result) => {
                       if (result.value) {
-            let url ='proveedores/activar/';
+            let url ='usuario/activar/';
             axios.put(url+id)
             .then(respose=>{
               Vue.swal(
                         'Activado',
-                        'Proveedor Activada con Exito',
+                        'Usuario Activado con Exito',
                         'success'
                      )
-                this.listarProveedores();
+                this.listarUsuarios();
             })
             .catch(error=>console.log(error))
              }
           })
         },
-        nuevoProveedor(){
-            let url ='proveedores/crear';
+        listarRoles(){
+                let url ='rol/listar';
+                axios.get(url)
+                .then(response=>{
+                    this.arrayRol  = response.data;                  
+                    
+                })
+                .catch(erros=>console.log(error))
+        },
+        nuevoUsuario(){
+            let url ='usuario/registrar';
             axios.post(url,{
             'nombres' : this.nombres,
             'apellidos' : this.apellidos,
@@ -245,18 +269,20 @@ export default {
             'correo': this.correo,
             'telefono': this.telefono,
             'contacto: this':this.contacto,
-            'telefono_contacto': this.telefono_contacto
-
+            'telefono_contacto': this.telefono_contacto,
+            'usuario': this.usuario,
+            'password': this.password,
+            'idrol': this.idrol
             })
             .then(response=>{
-                this.listarProveedores();         
+                this.listarUsuarios();         
             })
             .catch(error=>console.log(error));
         },
-        actualizarProveedor(){
+        actualizarUsuario(){
             
-            let url ='proveedores/actualizar/';
-            axios.put(url+this.id_proveedor,{
+            let url ='usuario/actualizar/';
+            axios.put(url+this.id_usuario,{
                 'nombres' : this.nombres,
                 'apellidos' : this.apellidos,
                 'tipo_documento':  this.tipo_documento,
@@ -265,26 +291,29 @@ export default {
                 'correo': this.correo,
                 'telefono': this.telefono,
                 'contacto':this.contacto,
-                'telefono_contacto': this.telefono_contacto
+                'telefono_contacto': this.telefono_contacto,
+                'usuario': this.usuario,
+                'password': this.password,
+                'idrol': this.idrol
             })
             .then(response=>{
               Vue.swal(
                                'Actualizado',
-                               'Proveedor Actualizado con Exito',
+                               'Usuario Actualizado con Exito',
                                'success'
                            )
-                this.listarProveedores();            
+                this.listarUsuarios();            
             })
             .catch(error=>console.log(error));
              
         },
         abrirModal(titulo, accion , data = []){
             switch(titulo){
-                case 'proveedor':{
+                case 'usuario':{
                     switch (accion){
                         case 'nuevo':{
-                              this.id_proveedor='',
-                              this.titulo_modal ='Registrar Proveedor';
+                              this.id_usuario='',
+                              this.titulo_modal ='Registrar Usuario';
                               this.titulo_accion = 'Guardar';
                               this.accion='1';                              
                               this.nombres='';
@@ -294,12 +323,13 @@ export default {
                               this.direccion='';
                               this.correo='';
                               this.telefono='';
-                              this.contacto='';
-                              this.telefono_contacto=''; 
+                              this.usuario='';
+                              this.idrol = '';
+                              this.usuario='';
                               break;
                         }
                         case 'actualizar':{
-                              this.titulo_modal ='Actualizar Proveedor';
+                              this.titulo_modal ='Actualizar Usuario';
                               this.titulo_accion = 'Actualizar'; 
                               this.accion='2';                             
                               this.nombres=data['nombres'];
@@ -308,10 +338,11 @@ export default {
                               this.nro_documento=data['nro_documento'];
                               this.direccion=data['direccion'];
                               this.correo=data['correo'];
-                              this.telefono=data['telefono'];
-                              this.contacto=data['contacto'];
-                              this.telefono_contacto=data['telefono_contacto'];
-                              this.id_proveedor=data['id'];
+                              this.telefono=data['telefono'];                             
+                              this.id_usuario=data['id'];
+                              this.idrol = data ['idrol'];
+                              this.usuario = data['usuario'];
+                              this.password = data['password'];
                               break; 
                         }
                     }

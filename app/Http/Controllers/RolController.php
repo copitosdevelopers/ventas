@@ -10,7 +10,15 @@ class RolController extends Controller
 
     public function listarRols()
     {
-        return Rol::all();
+        
+    
+       $roles = Rol::all();        
+       return $roles;
+
+       /*$roles = Rol::where('estado','=','1')
+        ->select('id','nombre')
+        ->orderby('nombre','asc')->get();
+        return ['roles' => $roles];*/
     }
 
     public function crearRol(Request $request)
