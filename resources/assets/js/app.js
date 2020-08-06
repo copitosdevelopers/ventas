@@ -16,6 +16,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 Vue.component('menu-component', require('./components/MenuComponent.vue'));
+ 
 import router from './routes';
 const app = new Vue({
     el: '#app',

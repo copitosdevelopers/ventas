@@ -50,6 +50,12 @@
               <p>Proveedores</p>
              </router-link>
           </li>
+          <li class="nav-item">
+             <router-link :to="{name:'administrarIngresos'}" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Ingresos</p>
+             </router-link>
+          </li>
         </ul>
       </li>
       <li class="nav-item ">
@@ -86,6 +92,7 @@
           </p>
         </a>
       </li>
+      
     </ul>
   </nav>
 </template>

@@ -119,6 +119,7 @@ export default {
 
                 app.modoEdit = false;
                 app.tituloModal = 'Registrando rol';
+                this.dataRol = {}
                 console.log(app.dataRol);
 
             }else{

@@ -33,7 +33,7 @@ class UserController extends Controller
             $personas->direccion = $request->direccion;
             $personas->correo = $request->correo;
             $personas->telefono = $request->telefono;
-            $personas->usuario = $request->usuario;
+            $personas->usuario = \Auth::user()->id;
             $personas->estado = "1";
             $personas->save();          
 
@@ -68,7 +68,7 @@ class UserController extends Controller
                 $personas->direccion = $request->direccion;
                 $personas->correo = $request->correo;
                 $personas->telefono = $request->telefono;
-                $personas->usuario = $request->usuario;
+                $personas->usuario = \Auth::user()->id;
                 $personas->estado = "1";
                 $personas->save();        
     

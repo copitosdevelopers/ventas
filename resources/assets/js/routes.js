@@ -39,6 +39,11 @@ export default new Router({
             path: '/administrar/usuario',
             name: 'administrarUsuario', 
             component: require('./views/User')
+        },
+        {
+            path: '/administrar/ingresos',
+            name: 'administrarIngresos', 
+            component: require('./views/Ingreso')
         }
     ]
 })

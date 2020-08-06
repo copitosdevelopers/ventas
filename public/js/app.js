@@ -1393,7 +1393,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(14);
-module.exports = __webpack_require__(81);
+module.exports = __webpack_require__(84);
 
 
 /***/ }),
@@ -1426,6 +1426,7 @@ __webpack_require__(24);
 
 window.Vue = __webpack_require__(4);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('menu-component', __webpack_require__(48));
+
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   el: '#app',
@@ -49090,7 +49091,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -49134,6 +49135,13 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -49351,6 +49359,26 @@ var render = function() {
                 )
               ],
               1
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              { staticClass: "nav-item" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { to: { name: "administrarIngresos" } }
+                  },
+                  [
+                    _c("i", { staticClass: "far fa-circle nav-icon" }),
+                    _vm._v(" "),
+                    _c("p", [_vm._v("Ingresos")])
+                  ]
+                )
+              ],
+              1
             )
           ])
         ]),
@@ -49503,6 +49531,10 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         path: '/administrar/usuario',
         name: 'administrarUsuario',
         component: __webpack_require__(78)
+    }, {
+        path: '/administrar/ingresos',
+        name: 'administrarIngresos',
+        component: __webpack_require__(81)
     }]
 }));
 
@@ -52718,7 +52750,7 @@ var staticRenderFns = [
             _c("div", { staticClass: "inner" }, [
               _c("h3", [_vm._v("150")]),
               _vm._v(" "),
-              _c("p", [_vm._v("New Orders")])
+              _c("p", [_vm._v("Ordenes Nuevas")])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "icon" }, [
@@ -52726,7 +52758,7 @@ var staticRenderFns = [
             ]),
             _vm._v(" "),
             _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-              _vm._v("More info "),
+              _vm._v("Mas informacion "),
               _c("i", { staticClass: "fas fa-arrow-circle-right" })
             ])
           ])
@@ -52761,7 +52793,7 @@ var staticRenderFns = [
             _c("div", { staticClass: "inner" }, [
               _c("h3", [_vm._v("44")]),
               _vm._v(" "),
-              _c("p", [_vm._v("User Registrations")])
+              _c("p", [_vm._v("Usuarios Registrados")])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "icon" }, [
@@ -52769,7 +52801,7 @@ var staticRenderFns = [
             ]),
             _vm._v(" "),
             _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-              _vm._v("More info "),
+              _vm._v("Mas informacion "),
               _c("i", { staticClass: "fas fa-arrow-circle-right" })
             ])
           ])
@@ -55814,6 +55846,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 app.modoEdit = false;
                 app.tituloModal = 'Registrando rol';
+                this.dataRol = {};
                 console.log(app.dataRol);
             } else {
 
@@ -57260,6 +57293,590 @@ if (false) {
 
 /***/ }),
 /* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(82)
+/* template */
+var __vue_template__ = __webpack_require__(83)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/views/Ingreso.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7c92332e", Component.options)
+  } else {
+    hotAPI.reload("data-v-7c92332e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 82 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+        this.listarIngresos();
+        this.listarRoles();
+    },
+    data: function data() {
+        return {
+            ingreso_id: 0,
+            idproveedor: 0,
+            nombres: '',
+            tipo_comprobante: 'Boleta',
+            serie_comprobante: '',
+            num_comprobante: '',
+            impuesto: 0.18,
+            total: 0.0,
+            arrayIngreso: [],
+            arrayDetalle: [],
+            titulo_modal: '',
+            titulo_accion: '',
+            accion: ''
+        };
+    },
+
+    methods: {
+        listarIngresos: function listarIngresos() {
+            var _this = this;
+
+            var url = 'ingreso/listar';
+            axios.get(url).then(function (response) {
+                _this.arrayIngreso = response.data;
+            }).catch(function (error) {
+                return console.log(error);
+            });
+        },
+        desactivarUsuario: function desactivarUsuario(id) {
+            var _this2 = this;
+
+            Vue.swal({
+                title: 'Estas seguro de desactivar este Usuario?',
+                //text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si Desactivar!'
+            }).then(function (result) {
+                if (result.value) {
+                    var url = 'usuario/desactivar/';
+                    axios.put(url + id).then(function (respose) {
+                        _this2.listarUsuarios();
+                        Vue.swal('Desactivado', 'Usuario Desactivado con Exito', 'success');
+                    }).catch(function (error) {
+                        return console.log(error);
+                    });
+                }
+            });
+        },
+        activarUsuario: function activarUsuario(id) {
+            var _this3 = this;
+
+            Vue.swal({
+                title: 'Estas seguro de activar este Usuario?',
+                //text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si Activar!'
+            }).then(function (result) {
+                if (result.value) {
+                    var url = 'usuario/activar/';
+                    axios.put(url + id).then(function (respose) {
+                        Vue.swal('Activado', 'Usuario Activado con Exito', 'success');
+                        _this3.listarUsuarios();
+                    }).catch(function (error) {
+                        return console.log(error);
+                    });
+                }
+            });
+        },
+        listarRoles: function listarRoles() {
+            var _this4 = this;
+
+            var url = 'rol/listar';
+            axios.get(url).then(function (response) {
+                _this4.arrayRol = response.data;
+            }).catch(function (erros) {
+                return console.log(error);
+            });
+        },
+        nuevoUsuario: function nuevoUsuario() {
+            var _this5 = this;
+
+            var url = 'usuario/registrar';
+            axios.post(url, {
+                'nombres': this.nombres,
+                'apellidos': this.apellidos,
+                'tipo_documento': this.tipo_documento,
+                'nro_documento': this.nro_documento,
+                'direccion': this.direccion,
+                'correo': this.correo,
+                'telefono': this.telefono,
+                'contacto: this': this.contacto,
+                'telefono_contacto': this.telefono_contacto,
+                'usuario': this.usuario,
+                'password': this.password,
+                'idrol': this.idrol
+            }).then(function (response) {
+                _this5.listarUsuarios();
+            }).catch(function (error) {
+                return console.log(error);
+            });
+        },
+        actualizarUsuario: function actualizarUsuario() {
+            var _this6 = this;
+
+            var url = 'usuario/actualizar/';
+            axios.put(url + this.id_usuario, {
+                'nombres': this.nombres,
+                'apellidos': this.apellidos,
+                'tipo_documento': this.tipo_documento,
+                'nro_documento': this.nro_documento,
+                'direccion': this.direccion,
+                'correo': this.correo,
+                'telefono': this.telefono,
+                'contacto': this.contacto,
+                'telefono_contacto': this.telefono_contacto,
+                'usuario': this.usuario,
+                'password': this.password,
+                'idrol': this.idrol
+            }).then(function (response) {
+                Vue.swal('Actualizado', 'Usuario Actualizado con Exito', 'success');
+                _this6.listarUsuarios();
+            }).catch(function (error) {
+                return console.log(error);
+            });
+        },
+        abrirModal: function abrirModal(titulo, accion) {
+            var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+
+            switch (titulo) {
+                case 'usuario':
+                    {
+                        switch (accion) {
+                            case 'nuevo':
+                                {
+                                    this.id_usuario = '', this.titulo_modal = 'Registrar Usuario';
+                                    this.titulo_accion = 'Guardar';
+                                    this.accion = '1';
+                                    this.nombres = '';
+                                    this.apellidos = '';
+                                    this.tipo_documento = '';
+                                    this.nro_documento = '';
+                                    this.direccion = '';
+                                    this.correo = '';
+                                    this.telefono = '';
+                                    this.usuario = '';
+                                    this.idrol = '';
+                                    this.usuario = '';
+                                    break;
+                                }
+                            case 'actualizar':
+                                {
+                                    this.titulo_modal = 'Actualizar Usuario';
+                                    this.titulo_accion = 'Actualizar';
+                                    this.accion = '2';
+                                    this.nombres = data['nombres'];
+                                    this.apellidos = data['apellidos'];
+                                    this.tipo_documento = data['tipo_documento'];
+                                    this.nro_documento = data['nro_documento'];
+                                    this.direccion = data['direccion'];
+                                    this.correo = data['correo'];
+                                    this.telefono = data['telefono'];
+                                    this.id_usuario = data['id'];
+                                    this.idrol = data['idrol'];
+                                    this.usuario = data['usuario'];
+                                    this.password = data['password'];
+                                    break;
+                                }
+                        }
+                    }
+            }
+        }
+    }
+});
+
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card mt-2" }, [
+    _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title" }, [
+        _vm._v("Lista de Ingresos \n                  ")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-primary btn-sm float-right",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#modal-lg"
+          },
+          on: {
+            click: function($event) {
+              return _vm.abrirModal("ingreso", "nuevo")
+            }
+          }
+        },
+        [
+          _vm._v("\n                            Nuevo "),
+          _c("i", { staticClass: "fas fa-plus" })
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body p-0 table-responsive" }, [
+      _c("table", { staticClass: "table table-sm" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.arrayIngreso, function(ingreso, index) {
+            return _c("tr", { key: ingreso.id }, [
+              _c("td", [_vm._v(_vm._s(index + 1))]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-outline-primary btn-sm",
+                    attrs: {
+                      type: "button",
+                      "data-toggle": "modal",
+                      "data-target": "#modal-lg"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.abrirModal("ingreso", "actualizar", ingreso)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fas fa-eye" })]
+                ),
+                _vm._v(" \n                          "),
+                ingreso.estado == "Registrado"
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-warning btn-sm",
+                        attrs: {
+                          type: "button",
+                          "data-toggle": "modal",
+                          "data-target": "#modal-lg"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.desactivarIngreso(
+                              "ingreso",
+                              "actualizar",
+                              ingreso
+                            )
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-edit" })]
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(ingreso.usuario))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(ingreso.nombres))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(ingreso.tipo_comprobante))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(ingreso.serie_comprobante))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(ingreso.num_comprobante))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(ingreso.fecha_hora))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(ingreso.total))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(ingreso.impuesto))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(ingreso.estado))])
+            ])
+          }),
+          0
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "modal fade", attrs: { id: "modal-lg" } }, [
+      _c("div", { staticClass: "modal-dialog modal-lg" }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _c("div", { staticClass: "card card-info" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _c("h3", { staticClass: "card-title" }, [
+                _vm._v(_vm._s(_vm.titulo_modal))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("form", { staticClass: "form-horizontal" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-sm-2 col-form-label",
+                      attrs: { for: "inputEmail3" }
+                    },
+                    [_vm._v("Nombre")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-sm-10" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.nombres,
+                          expression: "nombres"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "inputEmail3",
+                        placeholder: "Nombre"
+                      },
+                      domProps: { value: _vm.nombres },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.nombres = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-footer justify-content-between" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                attrs: { type: "button", "data-dismiss": "modal" }
+              },
+              [_vm._v("Cancelar")]
+            ),
+            _vm._v(" "),
+            _vm.accion == 1
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                    on: {
+                      click: function($event) {
+                        return _vm.nuevoUsuario()
+                      }
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.titulo_accion))]
+                )
+              : _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                    on: {
+                      click: function($event) {
+                        return _vm.actualizarUsuario()
+                      }
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.titulo_accion))]
+                )
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticStyle: { width: "10px" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Opciones")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Usuario ")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Proveedor")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("T. Comprobante ")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("S. Comprobante")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Nro. Comprobante")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Fecha Hora")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("total")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Impuestos")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Estado")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7c92332e", module.exports)
+  }
+}
+
+/***/ }),
+/* 84 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

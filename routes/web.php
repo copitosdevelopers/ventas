@@ -54,5 +54,12 @@ Route::put('usuario/desactivar/{id}','UserController@desactivarUsuario');
 
 Route::get('/','Auth\LoginController@showLoginForm');
 Route::post('/login','Auth\LoginController@login')->name('login');
+Route::post('/logout','Auth\LoginController@logout')->name('logout');
+
+
+Route::get('ingreso/listar','IngresoController@listarIngresos');
+Route::post('ingreso/registrar','IngresoController@nuevoIngreso');
+Route::put('ingreso/desactivar','IngresoController@desactivarIngreso');
+
 
 Route::get('/home', 'HomeController@index')->name('home');

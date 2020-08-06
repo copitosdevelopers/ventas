@@ -25,7 +25,7 @@ class PersonasController extends Controller
         $personas->direccion = $request->direccion;
         $personas->correo = $request->correo;
         $personas->telefono = $request->telefono;
-        $personas->usuario = $request->usuario;
+        $personas->usuario =\Auth::user()->id;
         $personas->estado = "1";
         $personas->save();
         return $personas;
@@ -40,7 +40,7 @@ class PersonasController extends Controller
         $personas->direccion = $request->direccion;
         $personas->correo = $request->correo;
         $personas->telefono = $request->telefono;
-        $personas->usuario = $request->usuario;
+        $personas->usuario = \Auth::user()->id;
         $personas->estado = "1";
         $personas->save();
         return $personas;
