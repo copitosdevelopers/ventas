@@ -9,8 +9,13 @@ import VueSweetalert2 from 'vue-sweetalert2';
  
 // If you don't need the styles, do not connect
 import 'sweetalert2/dist/sweetalert2.min.css';
- 
+import 'vue-select/dist/vue-select.css'; 
 Vue.use(VueSweetalert2);
+
+
+import vSelect from 'vue-select'
+
+Vue.component('v-select', vSelect)
 
 require('./bootstrap');
 

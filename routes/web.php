@@ -26,7 +26,7 @@ Route::post('personas/crear','PersonasController@crearPersonas');
 Route::put('personas/actualizar/{id}','PersonasController@actualizarPersonas');
 Route::put('personas/desactivar/{id}','PersonasController@desactivarPersonas');
 Route::put('personas/activar/{id}','PersonasController@activarPersonas');
-
+Route::get('personas/selectPersona','PersonasController@selectPersona');
 
 Route::get('proveedores/listar','ProveedoresController@listarProveedores');
 Route::post('proveedores/crear','ProveedoresController@crearProveedor');

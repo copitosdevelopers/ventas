@@ -77,74 +77,17 @@
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-10">
-                      <input v-model="nombres" type="text" class="form-control" id="inputEmail3" placeholder="Nombre">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Apellidos</label>
-                    <div class="col-sm-10">
-                      <input v-model="apellidos" type="text" class="form-control" id="inputPassword3" placeholder="Apellidos">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">T. Documento</label>
-                    <div class="col-sm-10">
-                      <!--<input v-model="tipo_documento" type="text" class="form-control" id="inputPassword3" placeholder="Apellidos">-->
-                      <select name="" id="" v-model="tipo_documento" class="form-control">
-                        <option value="">Seleccionar</option>
-                        <option value="D">Dni</option>
-                        <option value="P">Pasaporte</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Nro. Documento</label>
-                    <div class="col-sm-10">
-                      <input v-model="nro_documento" type="number" class="form-control" id="inputPassword3" placeholder="Documento">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Direccion</label>
-                    <div class="col-sm-10">
-                      <input v-model="direccion" type="text" class="form-control" id="inputPassword3" placeholder="direccion">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Email</label>
-                    <div class="col-sm-10">
-                      <input v-model="correo" type="text" class="form-control" id="inputPassword3" placeholder="Email">
-                    </div>
-                  </div>
+                      <v-select
+                        :on-search="selectPersona" 
+                        label="nombres" 
+                        :options="arrayPersona" 
+                        placeholder="Buscar Persona"
+                        on-change="getDatosPersona">
 
-                  <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Rol</label>
-                    <div class="col-sm-10">
-                      <select name="" id="" class="form-control" v-model="idrol">
-                          <option value="0">Seleccione un Rol</option>p    
-                          <option v-for="rol in arrayRol" :key="rol.id" :value="rol.id">{{rol.nombre}}</option>
-                     </select>
+                      </v-select>
                     </div>
+                  </div> 
                   
-                  </div>
-
-                  <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Telefono</label>
-                    <div class="col-sm-10">
-                      <input v-model="telefono" type="number" class="form-control" id="inputPassword3" placeholder="Telefono">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Usuario</label>
-                    <div class="col-sm-10">
-                      <input v-model="usuario" type="text" class="form-control" id="inputPassword3" placeholder="Telefono">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-10">
-                      <input v-model="password" required type="password" class="form-control" id="inputPassword3" placeholder="password">
-                    </div>
-                  </div>
                 </div>
                 
               </form>
@@ -163,21 +106,24 @@
 </template>
 
 <script>
-export default {
+ export default {
     mounted (){
         this.listarUsuarios();
         this.listarRoles();
-    },
+         
+    }, 
     data(){
         return {
+          idpersona :'',
             idrol:'',
             usuario: '',
             password :'',
             id_usuario:'',
             usuariosArray : [],
+            arrayPersona : [],
             arrayRol :[],  
             nombres :'',
-            apellidos :'',
+            apellidos :'',  
             tipo_documento: 1,
             nro_documento:'',
             direccion:'',
@@ -198,6 +144,23 @@ export default {
                 this.usuariosArray = response.data;
             })
             .catch(error=>console.log(error))
+        },
+        selectPersona(search, loading){
+          //loading(true);
+          let app = this;
+          let url ="/personas/selectPersona?filtro="+search;
+          axios.get(url)
+          .then(response=>{
+              q: search
+              app.arrayPersona= response.data;
+              console.log(app.arrayPersona);
+              //loading(false);
+          })  
+          .catch(error=>console.log(error))
+        },
+        getDatosPersona(val1){
+         // this.loading=true;
+         // this.idpersona= val1.id;
         },
         desactivarUsuario(id){
           Vue.swal({

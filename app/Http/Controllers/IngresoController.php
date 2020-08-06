@@ -9,7 +9,9 @@ use App\Ingreso;
 use App\DetalleIngreso;
 
 class IngresoController extends Controller
-{
+{   
+    
+
     public function listarIngresos(Request $request){
         //if(!$request->ajax()) return redirect('/');
         $ingresos = Ingreso::join('personas','ingresos.idproveedor','=','personas.id')

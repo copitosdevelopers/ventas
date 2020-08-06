@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 
 class PersonasController extends Controller
 {
+    public function selectPersona(Request $request){
+        if(!$request->ajax()) return redirect('/');
+        
+        $filtro =$request->filtro;
+        $personas = Personas::where('personas.nombres','like','%'.$filtro.'%')
+        ->orwhere('personas.apellidos','like','%'.$filtro.'%')
+        ->select('personas.id','personas.nombres','personas.apellidos')
+        ->orderBy('personas.nombres','asc')->get();
+        return $personas;
+    }
+
     public function listarPersonas(Request $request){
         //if(!$request->ajax()) return redirect('/');
         //$categorias = Categoria::where('estado','=','1')
