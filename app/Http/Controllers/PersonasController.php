@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Personas;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,18 @@ class PersonasController extends Controller
         ->orderBy('personas.nombres','asc')->get();
         return $personas;
     }
+
+    public function obtenerPersonas(){
+
+        $personal = Db::table("personas")
+                     ->select(Db::raw("id, nombres, apellidos, concat(concat(concat (nombres,' '),apellidos), ' ') nombre_completo, telefono, correo"))
+                     /* ->whereRaw("p.estado = 1")
+                     ->orderBy("text") */ 
+                     ->get();
+    
+         return $personal;
+    }
+
 
     public function listarPersonas(Request $request){
         //if(!$request->ajax()) return redirect('/');

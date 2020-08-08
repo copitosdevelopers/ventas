@@ -62,52 +62,70 @@
                   </tbody>
                 </table>
               </div>
-      <div class="modal fade" id="modal-lg">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            
-            <div class="card card-info">
-              <div class="card-header">
-                <h3 class="card-title">{{titulo_modal}}</h3>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form class="form-horizontal">
-                <div class="card-body">
-                  <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Nombre</label>
-                    <div class="col-sm-10">
-                      <v-select
-                        :on-search="selectPersona" 
-                        label="nombres" 
-                        :options="arrayPersona" 
-                        placeholder="Buscar Persona"
-                        on-change="getDatosPersona">
 
-                      </v-select>
+              <div class="modal fade" id="modal-lg">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">{{titulo_modal}}</h3>
+                      </div>
+                      <!-- /.card-header -->
+                      <!-- form start -->
+                      <form class="form-horizontal">
+                        <div class="card-body">
+                          <div class="form-group row">
+                            <div class="col-sm-12">
+                              <!-- <v-select
+                                :on-search="selectPersona" 
+                                label="nombres" 
+                                :options="arrayPersona" 
+                                placeholder="Buscar Persona"
+                                on-change="getDatosPersona">
+
+                              </v-select> -->
+                              <div class="form-group">
+                                <label>Persona</label>
+                                <select id="personas" class="form-control select2" style="width: 100%;">
+                                <option selected disabled>Buscar y seleccionar persona</option>
+                                    <option v-for="persona in personas" :key="persona.id" :value="persona.id">{{persona.nombre_completo}}</option>
+                                </select>
+                              </div>
+
+                              <div class="form-group">
+                                <label>Rol</label>
+                                <select id="personas" class="form-control" style="width: 100%;">
+                                <option selected disabled>Seleccionar rol</option>
+                                    <option v-for="rol in arrayRol" :key="rol.id" :value="rol.id">{{rol.nombre}} - {{rol.descripcion}}</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div> 
+                          
+                        </div>
+                        
+                      </form>
                     </div>
-                  </div> 
-                  
+                    <div class="modal-footer justify-content-between">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                      <button v-if="accion==1" type="button" class="btn btn-primary" data-dismiss="modal" @click="nuevoUsuario()">{{titulo_accion}}</button>
+                      <button v-else type="button" class="btn btn-primary" data-dismiss="modal" @click="actualizarUsuario()">{{titulo_accion}}</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
                 </div>
-                
-              </form>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-              <button v-if="accion==1" type="button" class="btn btn-primary" data-dismiss="modal" @click="nuevoUsuario()">{{titulo_accion}}</button>
-              <button v-else type="button" class="btn btn-primary" data-dismiss="modal" @click="actualizarUsuario()">{{titulo_accion}}</button>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
+                <!-- /.modal-dialog -->
+              </div>
    </div>
 </template>
 
 <script>
+
+
  export default {
     mounted (){
+        this.obtenerPersonas();
         this.listarUsuarios();
         this.listarRoles();
          
@@ -133,10 +151,22 @@
             titulo_accion:'',
             accion:'',
             errorCategoria: 0,
-            errorMsjCategoria: []
+            errorMsjCategoria: [],
+            personas:[]
         }
     }, 
     methods : {
+
+        obtenerPersonas(){
+          let app = this;
+          let url = 'personas/obtenerPersonas';
+          axios.get(url)
+            .then(response => {
+              app.personas = response.data;
+            })
+            .catch(error => console.log(error))
+        },
+
         listarUsuarios(){
             let url ='usuario/listar';
             axios.get(url)
@@ -145,23 +175,7 @@
             })
             .catch(error=>console.log(error))
         },
-        selectPersona(search, loading){
-          //loading(true);
-          let app = this;
-          let url ="/personas/selectPersona?filtro="+search;
-          axios.get(url)
-          .then(response=>{
-              q: search
-              app.arrayPersona= response.data;
-              console.log(app.arrayPersona);
-              //loading(false);
-          })  
-          .catch(error=>console.log(error))
-        },
-        getDatosPersona(val1){
-         // this.loading=true;
-         // this.idpersona= val1.id;
-        },
+
         desactivarUsuario(id){
           Vue.swal({
                     title: 'Estas seguro de desactivar este Usuario?',
@@ -271,6 +285,11 @@
              
         },
         abrirModal(titulo, accion , data = []){
+
+          $(document).ready(function(){
+                $('.select2').select2();
+          })
+
             switch(titulo){
                 case 'usuario':{
                     switch (accion){
