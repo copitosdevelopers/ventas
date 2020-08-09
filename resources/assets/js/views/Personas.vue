@@ -6,12 +6,17 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Personas</h1>
+            <h1>Listado de Clientes</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Almacen</a></li>
-              <li class="breadcrumb-item active">Personas</li>
+              <li class="breadcrumb-item active">Clientes</li>
+              <li class="breadcrumb-item">
+                <button type="button" class="btn btn-outline-primary btn-sm float-right" data-toggle="modal" data-target="#modal-default" @click="abrirModal('personas','nuevo')">
+                              Nuevo <i class="fas fa-plus"></i>
+                </button>
+              </li>
             </ol>
           </div>
         </div>
@@ -24,13 +29,13 @@
         <div class="row">
           <div class="col-12">
             <div class="card">
-              <div class="card-header">
+             <!-- <div class="card-header">
                 <h3 class="card-title">Listado de Personas</h3>
                 <button type="button" class="btn btn-outline-primary btn-sm float-right" data-toggle="modal" data-target="#modal-default" @click="abrirModal('personas','nuevo')">
                               Nuevo <i class="fas fa-plus"></i>
                 </button>
               </div>
-              <!-- /.card-header -->
+               /.card-header -->
               <div class="card-body">
                 <table id="tablita" class="table table-bordered table-hover">
                   <thead>
@@ -84,57 +89,76 @@
     <!-- /.content -->
 
     <div class="modal fade" id="modal-default">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
           <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">{{titulo_modal}}</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form>
+             <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">{{titulo_modal}}</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form class="form-horizontal">
                 <div class="card-body">
-                  <div class="form-group">
-                    <label for="nombres">Nombres</label>
-                    <input v-model="nombres" type="text" class="form-control" id="nombres" placeholder="Nombres">
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Nombres</label>
+                    <div class="col-sm-10">
+                     <input v-model="nombres" type="text" class="form-control" id="nombres" placeholder="Nombres">
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="apellidos">Apellidos</label>
-                    <input v-model="apellidos" type="text" class="form-control" id="apellidos" placeholder="Apellidos">
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Apellidos</label>
+                    <div class="col-sm-10">
+                      <input v-model="apellidos" type="text" class="form-control" id="apellidos" placeholder="Apellidos">
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="tipo_documento" >Tipo Documento</label>
-                    <select v-model="tipo_documento" class="form-control" id="tipo_documento">
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Tipo Documento</label>
+                    <div class="col-sm-10">
+                      <select v-model="tipo_documento" class="form-control" id="tipo_documento">
                       <option value="">[Seleccione Tipo...]</option>
                       <option value="D">DNI</option>
                       <option value="P">Pasaporte</option>
                       <option value="O">Otro</option>
                     </select>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="nro_documento">Nro Docuemto</label>
-                    <input v-model="nro_documento" type="text" class="form-control" id="nro_documento" placeholder="Nro Docuemnto">
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Nro Documento</label>
+                    <div class="col-sm-10">
+                      <input v-model="nro_documento" type="number" class="form-control" id="nro_documento" placeholder="Nro Documento">
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="direccion">Direccion</label>
-                    <input v-model="direccion" type="text" class="form-control" id="direccion" placeholder="Dirección">
+
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Direccion</label>
+                    <div class="col-sm-10">
+                      <input v-model="direccion" type="text" class="form-control" id="direccion" placeholder="Dirección">
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="correo">Correo</label>
-                    <input v-model="correo" type="text" class="form-control" id="correo" placeholder="Correo">
+
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Correo</label>
+                    <div class="col-sm-10">
+                       <input v-model="correo" type="email" class="form-control" id="correo" placeholder="Correo">
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="telefono">Telefono</label>
-                    <input v-model="telefono" type="text" class="form-control" id="telefono" placeholder="Telefono">
+
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Telefono</label>
+                    <div class="col-sm-10">
+                      <input v-model="telefono" type="number" class="form-control" id="telefono" placeholder="Telefono">
+                    </div>
                   </div>
-                </div>
+
+
+                  
+                </div> 
               </form>
-            </div>
-            <div class="modal-footer justify-content-between">
+              <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
               <button v-if="accion==1" type="button" class="btn btn-primary" data-dismiss="modal" @click="nuevaPersonas()">{{titulo_accion}}</button>
               <button v-else type="button" class="btn btn-primary" data-dismiss="modal" @click="actualizarPersonas()">{{titulo_accion}}</button>
+            </div>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -227,14 +251,7 @@ export default {
             .then(response=>{
               $("#tablita").dataTable().fnDestroy();
                 this.listarPersonas();
-                this.nombres='',
-                this.apellidos='',
-                this.tipo_documento='',
-                this.nro_documento='',
-                this.direccion='',
-                this.correo='',
-                this.telefono=''
-                this.validarPersonas();           
+                     
             })
             .catch(error=>console.log(error));
         },
@@ -286,19 +303,13 @@ export default {
                 'telefono': this.telefono
             })
             .then(response=>{
+              $("#tablita").dataTable().fnDestroy();
               Vue.swal(
                                'Actualizado',
                                'Persona Actualizado con Exito',
                                'success'
                            )
-                this.listarPersonas();
-                this.nombres='';
-                this.apellidos='';
-                this.tipo_documento='';
-                this.nro_documento='';
-                this.direccion='';
-                this.correo='';
-                this.telefono='';            
+                this.listarPersonas();           
             })
             .catch(error=>console.log(error));
              
@@ -317,6 +328,7 @@ export default {
             let url ='personas/desactivar/';
             axios.put(url+id)
             .then(respose=>{
+              $("#tablita").dataTable().fnDestroy();
                 this.listarPersonas();
                 Vue.swal(
                         'Desactivada',
@@ -347,6 +359,7 @@ export default {
                         'Persona Activada con Exito',
                         'success'
                      )
+                $("#tablita").dataTable().fnDestroy();     
                 this.listarPersonas();
             })
             .catch(error=>console.log(error))

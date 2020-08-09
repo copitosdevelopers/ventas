@@ -163,10 +163,6 @@
               <button v-if="modoEdit" type="button" class="btn btn-primary" data-dismiss="modal" @click="actualizarUsuario(dataUsuario.id)">Actualizar</button>
               <button v-else type="button" class="btn btn-primary" data-dismiss="modal" @click="crearUsuario()">Registrar</button>
             </div>
-
-            <pre>
-              {{dataUsuario}}
-            </pre>
            
           </div>
 
