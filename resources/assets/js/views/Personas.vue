@@ -68,17 +68,7 @@
                       </td>
                   </tr>
                   </tbody>
-                  <tfoot>
-                  <tr>
-                    <th>#</th>
-                    <th>Apellidos y Nombres</th>
-                    <th>Documento</th>
-                    <th>Correo</th>
-                    <th>Telefono</th>
-                    <th>Estado</th>
-                    <th>Opciones</th>
-                  </tr>
-                  </tfoot>
+                  
                 </table>
               </div>
               <!-- /.card-body -->
@@ -235,6 +225,7 @@ export default {
                 'telefono': this.telefono
             })
             .then(response=>{
+              $("#tablita").dataTable().fnDestroy();
                 this.listarPersonas();
                 this.nombres='',
                 this.apellidos='',

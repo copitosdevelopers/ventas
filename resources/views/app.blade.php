@@ -14,6 +14,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="/plantilla/plugins/fontawesome-free/css/all.min.css">
+
+  <link rel="stylesheet" href="/plantilla/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="/plantilla/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
   <!-- Tempusdominus Bootstrap 4 -->
   <link rel="stylesheet" href="/plantilla/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- Select2 -->
@@ -265,6 +269,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="/plantilla/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="/plantilla/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script src="/plantilla/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/plantilla/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/plantilla/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/plantilla/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
 <!-- Select2 -->
 <script src="/plantilla/plugins/select2/js/select2.full.min.js"></script>
 <!-- AdminLTE App -->

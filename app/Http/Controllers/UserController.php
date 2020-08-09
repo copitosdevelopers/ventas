@@ -24,25 +24,13 @@ class UserController extends Controller
 
         try{
             DB::beginTransaction();
-
-            $personas = new Personas();
-            $personas->nombres = $request->nombres;
-            $personas->apellidos = $request->apellidos;
-            $personas->tipo_documento = $request->tipo_documento;
-            $personas->nro_documento = $request->nro_documento;
-            $personas->direccion = $request->direccion;
-            $personas->correo = $request->correo;
-            $personas->telefono = $request->telefono;
-            $personas->usuario = \Auth::user()->id;
-            $personas->estado = "1";
-            $personas->save();          
-
+              
             $user = new User();
             $user->usuario = $request->usuario;
             $user->password = bcrypt($request->password);
             $user->estado ='1';
             $user->idrol= $request->idrol;
-            $user->id = $personas->id;
+            $user->id = $request->id;
             $user->save();
 
             DB::commit();
