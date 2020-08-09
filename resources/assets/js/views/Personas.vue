@@ -26,6 +26,9 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Listado de Personas</h3>
+                <button type="button" class="btn btn-outline-primary btn-sm float-right" data-toggle="modal" data-target="#modal-default" @click="abrirModal('personas','nuevo')">
+                              Nuevo <i class="fas fa-plus"></i>
+                </button>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -89,9 +92,67 @@
       <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+
+    <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">{{titulo_modal}}</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="nombres">Nombres</label>
+                    <input v-model="nombres" type="text" class="form-control" id="nombres" placeholder="Nombres">
+                  </div>
+                  <div class="form-group">
+                    <label for="apellidos">Apellidos</label>
+                    <input v-model="apellidos" type="text" class="form-control" id="apellidos" placeholder="Apellidos">
+                  </div>
+                  <div class="form-group">
+                    <label for="tipo_documento" >Tipo Documento</label>
+                    <select v-model="tipo_documento" class="form-control" id="tipo_documento">
+                      <option value="">[Seleccione Tipo...]</option>
+                      <option value="D">DNI</option>
+                      <option value="P">Pasaporte</option>
+                      <option value="O">Otro</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="nro_documento">Nro Docuemto</label>
+                    <input v-model="nro_documento" type="text" class="form-control" id="nro_documento" placeholder="Nro Docuemnto">
+                  </div>
+                  <div class="form-group">
+                    <label for="direccion">Direccion</label>
+                    <input v-model="direccion" type="text" class="form-control" id="direccion" placeholder="Dirección">
+                  </div>
+                  <div class="form-group">
+                    <label for="correo">Correo</label>
+                    <input v-model="correo" type="text" class="form-control" id="correo" placeholder="Correo">
+                  </div>
+                  <div class="form-group">
+                    <label for="telefono">Telefono</label>
+                    <input v-model="telefono" type="text" class="form-control" id="telefono" placeholder="Telefono">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+              <button v-if="accion==1" type="button" class="btn btn-primary" data-dismiss="modal" @click="nuevaPersonas()">{{titulo_accion}}</button>
+              <button v-else type="button" class="btn btn-primary" data-dismiss="modal" @click="actualizarPersonas()">{{titulo_accion}}</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
   </div>
 </template>
-
 <script>
 export default {
     mounted (){
@@ -122,6 +183,145 @@ export default {
                 this.personas = response.data;
             })
             .catch(error=>console.log(error))
+        },
+        nuevaPersonas(){
+            let url ='personas/crear';
+            axios.post(url,{
+                'nombres' : this.nombres,
+                'apellidos': this.apellidos,
+                'tipo_documento': this.tipo_documento,
+                'nro_documento': this.nro_documento,
+                'direccion': this.direccion,
+                'correo': this.correo,
+                'telefono': this.telefono
+            })
+            .then(response=>{
+                this.listarPersonas();
+                this.nombres='',
+                this.apellidos='',
+                this.tipo_documento='',
+                this.nro_documento='',
+                this.direccion='',
+                this.correo='',
+                this.telefono=''
+                this.validarPersonas();           
+            })
+            .catch(error=>console.log(error));
+        },
+        abrirModal(titulo, accion , data = []){
+            switch(titulo){
+                case 'personas':{
+                    switch (accion){
+                        case 'nuevo':{
+                              this.titulo_modal ='Registrar Persona';
+                              this.titulo_accion = 'Guardar';
+                              this.accion='1'
+                              this.nombres='';
+                              this.apellidos='';
+                              this.tipo_documento='';
+                              this.nro_documento='';
+                              this.direccion='';
+                              this.correo='';
+                              this.telefono='';  
+                              break;
+                        }
+                        case 'actualizar':{
+                              this.titulo_modal ='Actualizar Persona';
+                              this.titulo_accion = 'Actualizar'; 
+                              this.accion='2'
+                              this.nombres= data['nombres'];
+                              this.apellidos= data['apellidos'];
+                              this.tipo_documento= data['tipo_documento'];
+                              this.nro_documento= data['nro_documento'];
+                              this.direccion= data['direccion'];
+                              this.correo= data['correo'];
+                              this.telefono= data['telefono'];
+                              this.id_categoria = data['id'];  
+                              break; 
+                        }
+                    }
+                }
+            }
+        },
+        actualizarPersonas(){
+            
+            let url ='personas/actualizar/';
+            axios.put(url+this.id_categoria,{
+                'nombres' : this.nombres,
+                'apellidos': this.apellidos,
+                'tipo_documento': this.tipo_documento,
+                'nro_documento': this.nro_documento,
+                'direccion': this.direccion,
+                'correo': this.correo,
+                'telefono': this.telefono
+            })
+            .then(response=>{
+              Vue.swal(
+                               'Actualizado',
+                               'Persona Actualizado con Exito',
+                               'success'
+                           )
+                this.listarPersonas();
+                this.nombres='';
+                this.apellidos='';
+                this.tipo_documento='';
+                this.nro_documento='';
+                this.direccion='';
+                this.correo='';
+                this.telefono='';            
+            })
+            .catch(error=>console.log(error));
+             
+        },
+        desactivarPersonas(id){
+          Vue.swal({
+                    title: 'Estas seguro de desactivar esta Persona?',
+                    //text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si Desactivar!'
+                    }).then((result) => {
+                      if (result.value) {
+            let url ='personas/desactivar/';
+            axios.put(url+id)
+            .then(respose=>{
+                this.listarPersonas();
+                Vue.swal(
+                        'Desactivada',
+                        'Persona Desactivada con Exito',
+                        'success'
+                     )
+            })
+            .catch(error=>console.log(error))
+                }
+            })
+        },
+        activarPersonas(id){
+          Vue.swal({
+                    title: 'Estas seguro de activar esta Persona?',
+                    //text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si Activar!'
+                    }).then((result) => {
+                      if (result.value) {
+            let url ='personas/activar/';
+            axios.put(url+id)
+            .then(respose=>{
+              Vue.swal(
+                        'Activado',
+                        'Persona Activada con Exito',
+                        'success'
+                     )
+                this.listarPersonas();
+            })
+            .catch(error=>console.log(error))
+             }
+          })
         }
 
     }
