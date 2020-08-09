@@ -14,8 +14,24 @@ class UserController extends Controller
         ->select('personas.id','personas.nombres','personas.apellidos','personas.direccion',
                 'personas.correo','personas.tipo_documento', 'personas.nro_documento',
                 'personas.telefono','personas.estado','users.usuario','users.password',
-                'users.estado','users.idrol','rols.nombre as rol')     
+                'users.estado', 'users.idrol','rols.nombre as rol')     
         ->orderBy('personas.id','desc')->get();
+
+      /*   $usuarios = [];
+        foreach($user as $use){
+            
+            $usuarios[$use->pass] = \Illuminate\Support\Facades\Crypt::decrypt($use->pass);
+        }
+ */
+        /* $string = 'c4ca4238a0b923820dcc';
+        $encrypted = \Illuminate\Support\Facades\Crypt::encrypt($string);
+        $decrypted_string = \Illuminate\Support\Facades\Crypt::decrypt($encrypted);
+
+        var_dump($string); 
+        var_dump($encrypted); 
+        var_dump($decrypted_string); */
+
+        
         return $user;
     }
 
