@@ -32,7 +32,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="tablita" class="table table-bordered table-hover">
+                <table id="example1" class="table table-bordered table-hover">
                   <thead>
                   <tr>
                     <th>#</th>
@@ -95,38 +95,52 @@
             <div class="modal-body">
               <form>
                 <div class="card-body">
-                  <div class="form-group">
-                    <label for="nombres">Nombres</label>
+                  <div class="form-group row">
+                    <label for="nombres" class="col-sm-3 col-form-label">Nombres</label>
+                    <div class="col-sm-9">
                     <input v-model="nombres" type="text" class="form-control" id="nombres" placeholder="Nombres">
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="apellidos">Apellidos</label>
+                  <div class="form-group row">
+                    <label for="apellidos" class="col-sm-3 col-form-label">Apellidos</label>
+                    <div class="col-sm-9">
                     <input v-model="apellidos" type="text" class="form-control" id="apellidos" placeholder="Apellidos">
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="tipo_documento" >Tipo Documento</label>
+                  <div class="form-group row">
+                    <label for="tipo_documento" class="col-sm-3 col-form-label">Tipo Documento</label>
+                    <div class="col-sm-9">
                     <select v-model="tipo_documento" class="form-control" id="tipo_documento">
                       <option value="">[Seleccione Tipo...]</option>
                       <option value="D">DNI</option>
                       <option value="P">Pasaporte</option>
                       <option value="O">Otro</option>
                     </select>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="nro_documento">Nro Docuemto</label>
+                  <div class="form-group row">
+                    <label for="nro_documento" class="col-sm-3 col-form-label">Nro Docuemto</label>
+                    <div class="col-sm-9">
                     <input v-model="nro_documento" type="text" class="form-control" id="nro_documento" placeholder="Nro Docuemnto">
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="direccion">Direccion</label>
+                  <div class="form-group row">
+                    <label for="direccion" class="col-sm-3 col-form-label">Direccion</label>
+                    <div class="col-sm-9">
                     <input v-model="direccion" type="text" class="form-control" id="direccion" placeholder="Dirección">
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="correo">Correo</label>
+                  <div class="form-group row">
+                    <label for="correo" class="col-sm-3 col-form-label">Correo</label>
+                    <div class="col-sm-9">
                     <input v-model="correo" type="text" class="form-control" id="correo" placeholder="Correo">
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="telefono">Telefono</label>
+                  <div class="form-group row">
+                    <label for="telefono" class="col-sm-3 col-form-label">Telefono</label>
+                    <div class="col-sm-9">
                     <input v-model="telefono" type="text" class="form-control" id="telefono" placeholder="Telefono">
+                    </div>
                   </div>
                 </div>
               </form>
@@ -172,41 +186,11 @@ export default {
             .then(response=>{
                 $(document).ready(function(){
                   
+                $("#example1").DataTable({
+                  "responsive": true,
+                  "autoWidth": false,
+                });
                 
-                $("#tablita").DataTable({
-                        language: {
-                            sProcessing: "Procesando...",
-                            sLengthMenu: "Mostrar MENU registros",
-                            sZeroRecords: "No se encontraron resultados",
-                            sEmptyTable: "Ningún dato disponible en esta tabla",
-                            sInfo:
-                            "Mostrando registros del START al END de un total de TOTAL registros",
-                            sInfoEmpty:
-                            "Mostrando registros del 0 al 0 de un total de 0 registros",
-                            sInfoFiltered: "(filtrado de un total de MAX registros)",
-                            sInfoPostFix: "",
-                            sSearch: "Buscar:",
-                            sUrl: "",
-                            sInfoThousands: ",",
-                            sLoadingRecords: "Cargando...",
-                            oPaginate: {
-                            sFirst: "Primero",
-                            sLast: "Último",
-                            sNext: "Siguiente",
-                            sPrevious: "Anterior"
-                            },
-                            oAria: {
-                            sSortAscending:
-                                ": Activar para ordenar la columna de manera ascendente",
-                            sSortDescending:
-                                ": Activar para ordenar la columna de manera descendente"
-                            }
-                        },
-
-                       /*  stateSave: true,
-                        "bDestroy": true */
-                        
-                        });
                 });        
                 this.personas = response.data;
 
@@ -225,7 +209,7 @@ export default {
                 'telefono': this.telefono
             })
             .then(response=>{
-              $("#tablita").dataTable().fnDestroy();
+                $("#example1").dataTable().fnDestroy();
                 this.listarPersonas();
                 this.nombres='',
                 this.apellidos='',
@@ -274,7 +258,6 @@ export default {
             }
         },
         actualizarPersonas(){
-            
             let url ='personas/actualizar/';
             axios.put(url+this.id_categoria,{
                 'nombres' : this.nombres,
@@ -286,6 +269,7 @@ export default {
                 'telefono': this.telefono
             })
             .then(response=>{
+              $("#example1").dataTable().fnDestroy();
               Vue.swal(
                                'Actualizado',
                                'Persona Actualizado con Exito',
@@ -317,6 +301,7 @@ export default {
             let url ='personas/desactivar/';
             axios.put(url+id)
             .then(respose=>{
+              $("#example1").dataTable().fnDestroy();
                 this.listarPersonas();
                 Vue.swal(
                         'Desactivada',
@@ -342,6 +327,7 @@ export default {
             let url ='personas/activar/';
             axios.put(url+id)
             .then(respose=>{
+              $("#example1").dataTable().fnDestroy();
               Vue.swal(
                         'Activado',
                         'Persona Activada con Exito',

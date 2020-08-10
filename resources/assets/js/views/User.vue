@@ -12,7 +12,7 @@
         Nuevo <i class="fas fa-plus"></i>
       </button>
     </div>
-    <div class="input-group">
+    <!--<div class="input-group">
       <input
         type="text"
         name="search"
@@ -25,7 +25,7 @@
           <i class="fas fa-search"></i>
         </button>
       </div>
-    </div>
+    </div>-->
 
     <!-- /.card-header -->
     <div class="card-body p-0">
@@ -33,12 +33,11 @@
         <thead>
           <tr>
             <th style="width: 10px">#</th>
-            <th>Nombre</th>
-            <th>Direccion</th>
-            <th>T. Doc</th>
+            <th>Apellidos y Nombres</th>
             <th>Email</th>
-            <th>Usuario</th>
             <th>Rol</th>
+            <th>Usuario</th>
+            <th>Direccion</th>
             <th style="width: 40px">Estado</th>
             <th>Opciones</th>
           </tr>
@@ -46,42 +45,22 @@
         <tbody>
           <tr v-for="(usuario, index) in usuariosArray" :key="usuario.id">
             <td>{{ index + 1 }}</td>
-            <td>{{ usuario.nombres }}</td>
-            <td>{{ usuario.direccion }}</td>
-            <td>{{ usuario.tipo_documento }}</td>
+            <td>{{ usuario.apellidos }} {{ usuario.nombres }}</td>
             <td>{{ usuario.correo }}</td>
-            <td>{{ usuario.usuario }}</td>
             <td>{{ usuario.rol }}</td>
-            <td>
-              <span v-if="usuario.estado == 1" class="badge bg-success"
-                >Activo</span
-              >
-              <span v-else class="badge bg-danger">Inactivo</span>
+            <td>{{ usuario.usuario }}</td>
+            <td>{{ usuario.direccion }}</td>
+            <td><span v-if="usuario.estado == 1" class="badge bg-success">Activo</span>
+                <span v-else class="badge bg-danger">Inactivo</span>
             </td>
             <td>
-              <button
-                type="button"
-                class="btn btn-outline-primary btn-sm"
-                data-toggle="modal"
-                data-target="#modal-lg"
-                @click="abrirModal('usuario', 'actualizar', usuario)"
-              >
+              <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#modal-lg" @click="abrirModal('usuario', 'actualizar', usuario)">
                 Editar <i class="fas fa-edit"></i>
               </button>
-              <button
-                v-if="usuario.estado == 1"
-                type="button"
-                class="btn btn-outline-danger btn-sm"
-                @click="desactivarUsuario(usuario.id)"
-              >
+              <button v-if="usuario.estado == 1" type="button" class="btn btn-outline-danger btn-sm" @click="desactivarUsuario(usuario.id)">
                 Desactivar <i class="fas fa-times"></i>
               </button>
-              <button
-                v-else
-                type="button"
-                class="btn btn-outline-success btn-sm"
-                @click="activarUsuario(usuario.id)"
-              >
+              <button v-else type="button" class="btn btn-outline-success btn-sm" @click="activarUsuario(usuario.id)">
                 Activar <i class="fas fa-check"></i>
               </button>
             </td>
@@ -102,66 +81,36 @@
             <form class="form-horizontal">
               <div class="card-body">
                 <div class="form-group row">
-                  <label   class="col-sm-2 col-form-label"
-                    >Nombre</label
-                  >
+                  <label   class="col-sm-2 col-form-label">Nombre</label>
                   <div class="col-sm-10">
-                   <select id="person" class="form-control select2" style="width: 100%;">
-                                <option selected disabled>Buscar y seleccionar persona</option>
-                                    <option v-for="persona in personas" 
-                                      :key="persona.id" 
-                                      :value="persona.id" 
-                                      >
-                                      {{persona.nombre_completo}}
-                                    </option>
-                                </select>
-                         
-
-                   
-                      <input  id="id_p" type="text" v-model="id_p" />
-                  </div>
-
-                </div>
-                <div class="form-group row">
-                  <label   class="col-sm-2 col-form-label"
-                    >Usuario</label
-                  >
-                  <div class="col-sm-10">
-                    <input
-                      v-model="usuario"
-                      type="text"
-                      class="form-control"
-                       
-                      placeholder="usuario"
-                    />
+                    <select id="person" class="form-control select2" style="width: 100%;">
+                      <option selected disabled value="">Buscar y seleccionar persona</option>
+                      <option v-for="persona in personas" :key="persona.id" :value="persona.id">{{persona.nombre_completo}}</option>
+                    </select>
+                    <input type="hidden" id="fff">
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label   class="col-sm-2 col-form-label"
-                    >Password</label
-                  >
+                  <label class="col-sm-2 col-form-label">Usuario</label>
                   <div class="col-sm-10">
-                    <input
-                      v-model="password"
-                      type="password"
-                      class="form-control"
-                       
-                      placeholder="password"
-                    />
+                    <input v-model="usuario" type="text" class="form-control" placeholder="usuario" />
                   </div>
                 </div>
-
-                 <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Rol</label>
-                    <div class="col-sm-10">
-                      <select name="" class="form-control" v-model="idrol">
-                          <option value="0">Seleccione un Rol</option>p    
-                          <option v-for="rol in arrayRol" :key="rol.id" :value="rol.id">{{rol.nombre}}</option>
-                     </select>
-                    </div>
-                  
-                  </div>  
-                 
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Password</label>
+                  <div class="col-sm-10">
+                    <input v-model="password" type="password" class="form-control" placeholder="password" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputPassword3" class="col-sm-2 col-form-label">Rol</label>
+                  <div class="col-sm-10">
+                    <select name="" class="form-control" v-model="idrol">
+                      <option value="">Seleccione un Rol</option>   
+                      <option v-for="rol in arrayRol" :key="rol.id" :value="rol.id">{{rol.nombre}}</option>
+                    </select>
+                  </div>
+                </div> 
               </div>
             </form>
             <div class="modal-footer justify-content-between">
@@ -190,31 +139,17 @@ export default {
     $(document).ready(function() {
         $(".select2").select2();
 
-        $("#person").on("select2:select",function(e){
-          //var idpersona = $(e.curentTarget).val();
-          //alert(idpersona);
-          var app = this;
-          var data = e.params.data;
-          alert(data.id);
-          app.id_p=data.id;
-          $('#id_p').val(app.id_p);
+        $('#person').on('select2:select', function (e) {
+            var data = e.params.data;
+            $('#fff').val(data.id);
+            console.log($('#fff').val());
         });
-
-        /*$('#personas').change(function(){
-          //alert($(this).val());
-          this.id_p = ($(this).val());
-          $('#id_p').val(this.id_p);
-          alert(this.id_p);
-        });*/
 
       });
 
   },
   data() {
     return {
-      id_p :'',
-      id_persona_new:'',
-      idpersona: "",
       idrol: "",
       usuario: "",
       password: "",
@@ -314,7 +249,7 @@ export default {
           usuario: this.usuario,
           password: this.password,
           idrol: this.idrol,
-          id: this.id_p
+          id: $('#fff').val()
         })
         .then((response) => {
           this.listarUsuarios();
@@ -345,9 +280,11 @@ export default {
               this.titulo_modal = "Registrar Usuario";
               this.titulo_accion = "Guardar";
               this.accion = "1";              
-              //this.usuario = "";
-              this.id= this.id_p;
-              this.idrol = "";             
+              this.usuario = "";
+              this.password = "";
+              $('#fff').val("");
+              this.idrol = ""; 
+              $('#person').val('').trigger('change.select2'); 
               break;
             }
             case "actualizar": {
