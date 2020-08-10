@@ -262,7 +262,7 @@ export default {
         .put(url + this.id_usuario, {                  
           usuario: this.usuario,
           password: this.password,
-          idrol: this.idrol,
+          idrol: this.idrol
         })
         .then((response) => {
           Vue.swal("Actualizado", "Usuario Actualizado con Exito", "success");
@@ -290,11 +290,13 @@ export default {
             case "actualizar": {
               this.titulo_modal = "Actualizar Usuario";
               this.titulo_accion = "Actualizar";
-              this.accion = "2";              
+              this.accion = "2";
               //this.id = this.id_usuario;
               this.idrol = data["idrol"];
               this.usuario = data["usuario"];
               this.password = data["password"];
+              $('#person').val(data["id"]).trigger('change.select2');
+              $('#fff').val(data["id"]);
               break;
             }
           }
