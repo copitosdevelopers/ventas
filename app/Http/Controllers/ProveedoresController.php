@@ -7,7 +7,12 @@ use Illuminate\Support\Facades\DB;
 use App\Proveedores;
 use App\Personas;
 class ProveedoresController extends Controller
-{
+{   
+    public function selectProveedor(Request $request){
+        $proveedor = Proveedores::all();
+        return $proveedor;
+    }    
+
     public function listarProveedores(Request $request){
         $proveedor = Proveedores::join('personas','proveedores.id','=','personas.id')
         ->select('personas.nombres','personas.apellidos','personas.direccion','personas.correo','proveedores.contacto','proveedores.telefono_contacto','personas.tipo_documento', 'personas.nro_documento',

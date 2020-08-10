@@ -35,6 +35,7 @@ Route::post('proveedores/crear','ProveedoresController@crearProveedor');
 Route::put('proveedores/actualizar/{id}','ProveedoresController@actualizarProveedor');
 Route::put('proveedores/desactivar/{id}','ProveedoresController@desactivarProveedor');
 Route::put('proveedores/activar/{id}','ProveedoresController@activarProveedor');
+Route::get('proveedores/selectProveedor','ProveedoresController@selectProveedor');
 
 Route::get('articulo/listar','ArticuloController@listarArticulo');
 Route::post('articulo/crear','ArticuloController@crearArticulo');

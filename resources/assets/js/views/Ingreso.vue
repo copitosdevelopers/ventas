@@ -1,15 +1,13 @@
 <template>
   <div class="card mt-2" >
               <div class="card-header">
-                <h3 class="card-title">Lista de Ingresos 
-                    </h3>
-                    <button type="button" class="btn btn-outline-primary btn-sm float-right" data-toggle="modal" data-target="#modal-lg" @click="abrirModal('ingreso','nuevo')">
-                              Nuevo <i class="fas fa-plus"></i>
-                    </button>
+                <h3 class="card-title">Lista de Ingresos </h3>                    
+                  <button type="button" class="btn btn-outline-primary btn-sm float-right" 
+                          data-toggle="modal" data-target="#modal-lg" 
+                          @click="abrirModal('ingreso','nuevo')">
+                          Nuevo <i class="fas fa-plus"></i>
+                  </button>
               </div>
-             
-              
-              <!-- /.card-header -->
               <div class="card-body p-0 table-responsive">
                 <table class="table table-sm">
                   <thead>
@@ -47,13 +45,76 @@
                       <td>{{ingreso.total}}</td>
                       <td>{{ingreso.impuesto}}</td>
                       <td>{{ingreso.estado}}</td>
-                    </tr>
-                  
-                    
+                    </tr>                 
                   </tbody>
                 </table>
               </div>
-      <div class="modal fade" id="modal-lg">
+
+              <div class="card-body p-0 table-responsive">
+                <form class="form-horizontal">
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Proveedor</label>
+                    <div class="col-sm-5">
+                      
+                      <select class="form-control select2" id="proveedores" >    
+                          <option selected disabled>Buscar y seleccionar Proveedor</option>                    
+                          <option v-for="proveedor in proveedores" 
+                              :key="proveedor.id"  
+                              :value="proveedor.id">
+                              {{ proveedor.nombres }}
+                          </option>
+                          
+                    </select>
+                    
+                    </div>
+                     <label for="inputEmail3" class="col-sm-2 col-form-label">Impuesto</label>
+                    <div class="col-sm-3">
+                      <input v-model="impuesto" type="text" class="form-control" placeholder="Nombre">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Tipo Comprobante</label>
+                    <div class="col-sm-2">
+                      <input v-model="tipo_comprobante" type="text" class="form-control" placeholder="Nombre">
+                    </div>
+                     <label for="inputEmail3" class="col-sm-2 col-form-label">Serie Comprobante</label>
+                    <div class="col-sm-2">
+                      <input v-model="serie_comprobante" type="text" class="form-control" placeholder="Nombre">
+                    </div>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Nro Comprobante</label>
+                    <div class="col-sm-2">
+                      <input v-model="num_comprobante" type="text" class="form-control" placeholder="Nombre">
+                    </div>
+                  </div>   
+
+                   <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-1 col-form-label">Articulo</label>
+                    <div class="col-sm-2">
+                      <input v-model="idarticulo" type="text" class="form-control" placeholder="Nombre">
+                    </div>
+                     <label for="inputEmail3" class="col-sm-1 col-form-label">Precio</label>
+                    <div class="col-sm-2">
+                      <input v-model="precio" type="text" class="form-control" placeholder="Nombre">
+                    </div>
+                    <label for="inputEmail3" class="col-sm-1 col-form-label">Cantidad</label>
+                    <div class="col-sm-2">
+                      <input v-model="cantidad" type="text" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col-sm-2">
+                      <button   type="button" 
+                                class="btn btn-outline-success btn-sm float-right"
+                                @click="nuevoIngreso()">
+                                Agregar <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+                  </div> 
+              
+                    <pre>{{dataIngreso}}</pre>
+                 </div>              
+              </form>
+              </div>  
+      <!--<div class="modal fade" id="modal-lg">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             
@@ -61,14 +122,14 @@
               <div class="card-header">
                 <h3 class="card-title">{{titulo_modal}}</h3>
               </div>
-              <!-- /.card-header -->
-              <!-- form start -->
+             
+        
               <form class="form-horizontal">
                 <div class="card-body">
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-10">
-                      <input v-model="nombres" type="text" class="form-control" id="inputEmail3" placeholder="Nombre">
+                      <input v-model="nombres" type="text" class="form-control" placeholder="Nombre">
                     </div>
                   </div>
                  
@@ -82,12 +143,10 @@
               <button v-if="accion==1" type="button" class="btn btn-primary" data-dismiss="modal" @click="nuevoUsuario()">{{titulo_accion}}</button>
               <button v-else type="button" class="btn btn-primary" data-dismiss="modal" @click="actualizarUsuario()">{{titulo_accion}}</button>
             </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-   </div>
+          </div>          
+        </div>         
+      </div>-->
+   </div> 
 </template>
 
 <script>
@@ -95,11 +154,25 @@ export default {
     mounted (){
         this.listarIngresos();
         this.listarRoles();
+        this.listarProveedores();
+
+        $(document).ready(function() {       
+        $(".select2").select2();
+        $('#proveedores').on('select2:select', function (e) {
+            let app = this;
+             app.idProveedor = e.params.data.id;          
+            console.log(app.idProveedor);
+        }); 
+      }); 
+
     },
     data(){
         return {
+            proveedores : [],
             ingreso_id :0,
-            idproveedor:0,
+            idarticulo:'',
+            precio: '',
+            cantidad: '',
             nombres:'',
             tipo_comprobante:'Boleta',
             serie_comprobante:'',
@@ -110,10 +183,21 @@ export default {
             arrayDetalle: [],  
             titulo_modal : '',
             titulo_accion:'',
-            accion:'' 
+            accion:'',
+            idProveedor: null,
+            dataIngreso: {}, 
         }
     }, 
-    methods : {
+    methods : {      
+        listarProveedores(){
+            let url ='proveedores/listar';
+            axios.get(url)
+            .then(response=>{
+                this.proveedores = response.data;
+                console.log(this.proveedores);
+            })
+            .catch(error=>console.log(error))
+        },
         listarIngresos(){
             let url ='ingreso/listar';
             axios.get(url)
@@ -181,24 +265,28 @@ export default {
                 })
                 .catch(erros=>console.log(error))
         },
-        nuevoUsuario(){
-            let url ='usuario/registrar';
+        selectProveedor(){
+          
+        },
+        nuevoIngreso(){
+          let iddd = this.idProveedor;
+          console.log(iddd);
+            let app = this;
+            let url ='ingreso/registrar';
+           // app.dataIngreso.idproveedor = this.idProveedor;
+            let nuevoIngreso = app.dataIngreso;
+            console.log(nuevoIngreso);
             axios.post(url,{
-            'nombres' : this.nombres,
-            'apellidos' : this.apellidos,
-            'tipo_documento':  this.tipo_documento,
-            'nro_documento': this.nro_documento,
-            'direccion': this.direccion,
-            'correo': this.correo,
-            'telefono': this.telefono,
-            'contacto: this':this.contacto,
-            'telefono_contacto': this.telefono_contacto,
-            'usuario': this.usuario,
-            'password': this.password,
-            'idrol': this.idrol
+              'tipo_comprobante' : this.tipo_comprobante,
+              'serie_comprobante' : this.serie_comprobante,
+              'num_comprobante' : this.num_comprobante,
+              'impuesto' : this.impuesto,
+              'idarticulo' : this.idarticulo,
+              'cantidad' : this.cantidad,
+              'precio' : this.precio
             })
             .then(response=>{
-                this.listarUsuarios();         
+                this.listarIngresos();         
             })
             .catch(error=>console.log(error));
         },
@@ -232,11 +320,11 @@ export default {
         },
         abrirModal(titulo, accion , data = []){
             switch(titulo){
-                case 'usuario':{
+                case 'ingreso':{
                     switch (accion){
                         case 'nuevo':{
                               this.id_usuario='',
-                              this.titulo_modal ='Registrar Usuario';
+                              this.titulo_modal ='Registrar Ingreso';
                               this.titulo_accion = 'Guardar';
                               this.accion='1';                              
                               this.nombres='';
@@ -251,7 +339,7 @@ export default {
                               this.usuario='';
                               break;
                         }
-                        case 'actualizar':{
+                        case 'ingreso':{
                               this.titulo_modal ='Actualizar Usuario';
                               this.titulo_accion = 'Actualizar'; 
                               this.accion='2';                             

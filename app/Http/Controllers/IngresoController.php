@@ -29,20 +29,21 @@ class IngresoController extends Controller
         try{
             DB::beginTransaction();
 
-            $mytime = Carbon::now('America/Latina');
+            $mytime = Carbon::now('America/Lima');
 
             $ingreso = new Ingreso();
-            $ingreso->idproveedor = $request->idproveedor;
+            $ingreso->idproveedor = 24;
+            //$ingreso->idproveedor = $request->idproveedor;
             $ingreso->idusuario = \Auth::user()->id;
             $ingreso->tipo_comprobante = $request->tipo_comprobante;
             $ingreso->serie_comprobante = $request->serie_comprobante;
             $ingreso->num_comprobante = $request->num_comprobante;
             $ingreso->fecha_hora = $mytime->toDateString();
             $ingreso->impuesto = $request->impuesto;
-            $ingreso->total = $request->total;
+            $ingreso->total = 48;
+            //$ingreso->total = $request->total;
             $ingreso->estado = 'Registrado';
-            $ingreso->save();
-                    
+            $ingreso->save();                    
 
             $detalles = $request->data;//Array de detalles
             //Recorro todos los elementos
@@ -51,7 +52,7 @@ class IngresoController extends Controller
             {
                 $detalle = new DetalleIngreso();
                 $detalle->idingreso = $ingreso->id;
-                $detalle->idarticulo = $det['idarticulo'];
+                $detalle->idarticulo = $det['idarticulo']; 
                 $detalle->cantidad = $det['cantidad'];
                 $detalle->precio = $det['precio'];          
                 $detalle->save();
