@@ -53,57 +53,71 @@
                   </tbody>
                 </table>
               </div>
-              <div class="modal fade" id="modal-default">
-        <div class="modal-dialog">
+      <div class="modal fade" id="modal-default">
+        <div class="modal-dialog modal-lg">
           <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">{{titulo_modal}}</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form>
-                  
+             <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">{{titulo_modal}}</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form class="form-horizontal">
                 <div class="card-body">
-                  <div class="form-group" >
-                    <label for="exampleInputEmail1">Categoria</label>
-                    <select class="form-control" v-model="id_categoria">                          
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Categoria</label>
+                    <div class="col-sm-10">
+                     <select class="form-control" v-model="id_categoria">                          
                           <option v-for="categoria in categorias" v-bind:key="categoria.id"  v-bind:value="categoria.id">
                           {{ categoria.nombre }}
                           </option>
                     </select>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Codigo</label>
-                    <input v-model="codigo" type="text" class="form-control" id="exampleInputEmail1" placeholder="Ingrese codigo">
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Codigo</label>
+                    <div class="col-sm-10">
+                       <input v-model="codigo" type="text" class="form-control" id="exampleInputEmail1" placeholder="Ingrese codigo">
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Nombre</label>
-                    <input v-model="nombre" type="text" class="form-control" id="exampleInputEmail1" placeholder="Ingrese Nombre">
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Nombre</label>
+                    <div class="col-sm-10">
+                       <input v-model="nombre" type="text" class="form-control" id="exampleInputEmail1" placeholder="Ingrese Nombre">
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Precio</label>
-                    <input v-model="precio" type="number" class="form-control"  placeholder="Ingrese precio">
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Precio</label>
+                    <div class="col-sm-10">
+                      <input v-model="precio" type="number" class="form-control"  placeholder="Ingrese precio">
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">stock</label>
-                    <input v-model="stock" type="number" class="form-control"  placeholder="Ingrese stock">
+
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Stock</label>
+                    <div class="col-sm-10">
+                      <input v-model="stock" type="number" class="form-control"  placeholder="Ingrese stock">
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Descripcion</label>
-                    <input v-model="descripcion" type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingrese Descripcion">
+
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Descripcion</label>
+                    <div class="col-sm-10">
+                        <input v-model="descripcion" type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingrese Descripcion">
+                    </div>
                   </div>
-                                 
-                   
-                </div>
+
                  
+
+
+                  
+                </div> 
               </form>
-            </div>
-            <div class="modal-footer justify-content-between">
+              <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
               <button v-if="accion==1" type="button" class="btn btn-primary" data-dismiss="modal" @click="nuevoArticulo()">{{titulo_accion}}</button>
               <button v-else type="button" class="btn btn-primary" data-dismiss="modal" @click="actualizarArticulo()">{{titulo_accion}}</button>
+            </div>
             </div>
           </div>
           <!-- /.modal-content -->

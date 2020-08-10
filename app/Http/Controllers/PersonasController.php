@@ -22,7 +22,7 @@ class PersonasController extends Controller
     public function obtenerPersonas(){
 
         $personal = Db::table("personas")
-                     ->select(Db::raw("id, nombres, apellidos, concat(concat(concat (nombres,' '),apellidos), ' ') nombre_completo, telefono, correo"))
+                     ->select(Db::raw("id, id as id_persona, nombres, apellidos, concat(concat(concat (nombres,' '),apellidos), ' ') nombre_completo, telefono, correo"))
                      /* ->whereRaw("p.estado = 1")
                      ->orderBy("text") */ 
                      ->get();
