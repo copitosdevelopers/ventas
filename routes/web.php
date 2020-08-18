@@ -42,6 +42,9 @@ Route::post('articulo/crear','ArticuloController@crearArticulo');
 Route::put('articulo/actualizar/{id}','ArticuloController@actualizarArticulo');
 Route::put('articulo/desactivar/{id}','ArticuloController@desactivarArticulo');
 Route::put('articulo/activar/{id}','ArticuloController@activarArticulo');
+Route::get('/articulo/buscarArticulo','ArticuloController@buscarArticulo'); 
+Route::get('/articulo/buscarArticuloModal','ArticuloController@buscarArticuloModal'); 
+
 
 Route::get('rol/listar','RolController@listarRols');
 Route::post('rol/crear','RolController@crearRol');
@@ -62,7 +65,8 @@ Route::post('/logout','Auth\LoginController@logout')->name('logout');
 
 Route::get('ingreso/listar','IngresoController@listarIngresos');
 Route::post('ingreso/registrar','IngresoController@nuevoIngreso');
-Route::put('ingreso/desactivar','IngresoController@desactivarIngreso');
-
+Route::put('ingreso/anular/{id}','IngresoController@anularIngreso');
+Route::get('/ingreso/obtenerCabecera','ingresoController@obtenerCabecera');
+Route::get('/ingreso/obtenerDetalles','ingresoController@obtenerDetalles');
 
 Route::get('/home', 'HomeController@index')->name('home');
