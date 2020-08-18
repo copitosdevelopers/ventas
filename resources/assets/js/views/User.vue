@@ -87,7 +87,7 @@
                       <option selected disabled value="">Buscar y seleccionar persona</option>
                       <option v-for="persona in personas" :key="persona.id" :value="persona.id">{{persona.nombre_completo}}</option>
                     </select>
-                    <input type="hidden" id="fff">
+                    <input type="hidden" id="valorPersona">
                   </div>
                 </div>
                 <div class="form-group row">
@@ -141,8 +141,8 @@ export default {
 
         $('#person').on('select2:select', function (e) {
             var data = e.params.data;
-            $('#fff').val(data.id);
-            console.log($('#fff').val());
+            $('#valorPersona').val(data.id);
+            console.log($('#valorPersona').val());
         });
 
       });
@@ -249,7 +249,7 @@ export default {
           usuario: this.usuario,
           password: this.password,
           idrol: this.idrol,
-          id: $('#fff').val()
+          id: $('#valorPersona').val()
         })
         .then((response) => {
           this.listarUsuarios();
@@ -259,10 +259,11 @@ export default {
     actualizarUsuario() {
       let url = "usuario/actualizar/";
       axios
-        .put(url + this.id_usuario, {                  
+        .put(url + $('#valorPersona').val(), {                  
           usuario: this.usuario,
           password: this.password,
-          idrol: this.idrol
+          idrol: this.idrol,
+          id: $('#valorPersona').val()
         })
         .then((response) => {
           Vue.swal("Actualizado", "Usuario Actualizado con Exito", "success");
@@ -271,8 +272,6 @@ export default {
         .catch((error) => console.log(error));
     },
     abrirModal(titulo, accion, data = []) {
-      
-
       switch (titulo) {
         case "usuario": {
           switch (accion) {
@@ -282,21 +281,27 @@ export default {
               this.accion = "1";              
               this.usuario = "";
               this.password = "";
-              $('#fff').val("");
+              $('#valorPersona').val("");
               this.idrol = ""; 
-              $('#person').val('').trigger('change.select2'); 
+              $('#person').val('').trigger('change.select2');
+              $('#person').select2({
+                disabled: false
+              });
               break;
             }
             case "actualizar": {
               this.titulo_modal = "Actualizar Usuario";
               this.titulo_accion = "Actualizar";
               this.accion = "2";
-              //this.id = this.id_usuario;
               this.idrol = data["idrol"];
               this.usuario = data["usuario"];
               this.password = data["password"];
               $('#person').val(data["id"]).trigger('change.select2');
-              $('#fff').val(data["id"]);
+              $('#valorPersona').val(data["id"]);
+              $('#person').select2({
+                disabled: true
+              });
+              //console.log(data["id"]);
               break;
             }
           }
