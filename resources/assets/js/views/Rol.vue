@@ -2,7 +2,7 @@
   <div class="card mt-2" >
               <div class="card-header">
                 <h3 class="card-title">Listado de Roles</h3>
-                    <button type="button" class="btn btn-outline-primary btn-sm float-right" data-toggle="modal" data-target="#modal-default" @click="abrirModal('crear', '')">
+                    <button type="button" class="btn btn-outline-primary btn-sm float-right" @click="abrirModal('crear', '')">
                             <i class="fas fa-plus"></i> Nuevo
                     </button>
               </div>
@@ -71,7 +71,7 @@
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <button v-if="modoEdit" type="button" class="btn btn-primary" data-dismiss="modal" @click="actualizarRol(dataRol.id)">Actualizar</button>
-                            <button v-else type="button" class="btn btn-primary" data-dismiss="modal" @click="crearRol()">Guardar</button>
+                            <button v-else type="button" class="btn btn-primary" @click="crearRol()">Guardar</button>
                         </div>
                     </form>
                     <!-- <pre>
@@ -97,7 +97,8 @@ export default {
             rols:[],
             dataRol:{},
             modoEdit: false,
-            tituloModal: ''
+            tituloModal: '',
+            validate:[]
         }
     }, 
     methods : {
@@ -114,6 +115,7 @@ export default {
 
         abrirModal(tipo, data=[]){
             let app = this;
+            $('#modal-default').modal('show');
 
             if(tipo == 'crear'){
 
@@ -134,6 +136,19 @@ export default {
 
         crearRol(){
             let app = this;
+            if(!app.dataRol.nombre){
+                app.validate.push("Ingresar Nombres");
+            }
+            if(!app.dataRol.descripcion){
+                app.validate.push("Ingresar Descripcion");
+            }
+
+            for(let i=0; i<app.validate.length; i++){
+                toastr.error(app.validate[i]);
+                //console.log(app.validate[i]);
+            }
+
+            if(app.validate<=0){
             let url ='rol/crear';
 
             let nuevoRol = app.dataRol;
@@ -141,9 +156,14 @@ export default {
             axios.post(url, nuevoRol)
             .then(response => {
                 Vue.swal("Rol creado");
+                $('#modal-default').modal('hide');
                 app.listarRols();
             })
             .catch(error => console.log(error))
+            }else{
+                app.validate = [];
+            }
+            
         },
 
         actualizarRol(id){

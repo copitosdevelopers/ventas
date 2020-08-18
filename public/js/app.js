@@ -56491,7 +56491,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             rols: [],
             dataRol: {},
             modoEdit: false,
-            tituloModal: ''
+            tituloModal: '',
+            validate: []
         };
     },
 
@@ -56510,6 +56511,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 
             var app = this;
+            $('#modal-default').modal('show');
 
             if (tipo == 'crear') {
 
@@ -56527,16 +56529,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         crearRol: function crearRol() {
             var app = this;
-            var url = 'rol/crear';
+            if (!app.dataRol.nombre) {
+                app.validate.push("Ingresar Nombres");
+            }
+            if (!app.dataRol.descripcion) {
+                app.validate.push("Ingresar Descripcion");
+            }
 
-            var nuevoRol = app.dataRol;
+            for (var i = 0; i < app.validate.length; i++) {
+                toastr.error(app.validate[i]);
+                //console.log(app.validate[i]);
+            }
 
-            axios.post(url, nuevoRol).then(function (response) {
-                Vue.swal("Rol creado");
-                app.listarRols();
-            }).catch(function (error) {
-                return console.log(error);
-            });
+            if (app.validate <= 0) {
+                var url = 'rol/crear';
+
+                var nuevoRol = app.dataRol;
+
+                axios.post(url, nuevoRol).then(function (response) {
+                    Vue.swal("Rol creado");
+                    $('#modal-default').modal('hide');
+                    app.listarRols();
+                }).catch(function (error) {
+                    return console.log(error);
+                });
+            } else {
+                app.validate = [];
+            }
         },
         actualizarRol: function actualizarRol(id) {
             var app = this;
@@ -56599,11 +56618,7 @@ var render = function() {
         "button",
         {
           staticClass: "btn btn-outline-primary btn-sm float-right",
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": "#modal-default"
-          },
+          attrs: { type: "button" },
           on: {
             click: function($event) {
               return _vm.abrirModal("crear", "")
@@ -56807,7 +56822,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-primary",
-                          attrs: { type: "button", "data-dismiss": "modal" },
+                          attrs: { type: "button" },
                           on: {
                             click: function($event) {
                               return _vm.crearRol()
@@ -57069,8 +57084,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       $('#person').on('select2:select', function (e) {
         var data = e.params.data;
-        $('#fff').val(data.id);
-        console.log($('#fff').val());
+        $('#valorPersona').val(data.id);
+        console.log($('#valorPersona').val());
       });
     });
   },
@@ -57174,7 +57189,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         usuario: this.usuario,
         password: this.password,
         idrol: this.idrol,
-        id: $('#fff').val()
+        id: $('#valorPersona').val()
       }).then(function (response) {
         _this5.listarUsuarios();
       }).catch(function (error) {
@@ -57185,10 +57200,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this6 = this;
 
       var url = "usuario/actualizar/";
-      axios.put(url + this.id_usuario, {
+      axios.put(url + $('#valorPersona').val(), {
         usuario: this.usuario,
         password: this.password,
-        idrol: this.idrol
+        idrol: this.idrol,
+        id: $('#valorPersona').val()
       }).then(function (response) {
         Vue.swal("Actualizado", "Usuario Actualizado con Exito", "success");
         _this6.listarUsuarios();
@@ -57196,18 +57212,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return console.log(error);
       });
     },
-    abrirModal: function abrirModal(accion) {
-      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+    abrirModal: function abrirModal(titulo, accion) {
+      var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
 
-      var app = this;
-      $(document).ready(function () {
-
-        $(".select2").select2();
-        $('#personas').on('select2:select', function (e) {
-          app.idPersona = e.params.data.id;
-          console.log(app.idPersona);
-        });
-      });
+      switch (titulo) {
+        case "usuario":
+          {
+            switch (accion) {
+              case "nuevo":
+                {
+                  this.titulo_modal = "Registrar Usuario";
+                  this.titulo_accion = "Guardar";
+                  this.accion = "1";
+                  this.usuario = "";
+                  this.password = "";
+                  $('#valorPersona').val("");
+                  this.idrol = "";
+                  $('#person').val('').trigger('change.select2');
+                  $('#person').select2({
+                    disabled: false
+                  });
+                  break;
+                }
+              case "actualizar":
+                {
+                  this.titulo_modal = "Actualizar Usuario";
+                  this.titulo_accion = "Actualizar";
+                  this.accion = "2";
+                  this.idrol = data["idrol"];
+                  this.usuario = data["usuario"];
+                  this.password = data["password"];
+                  $('#person').val(data["id"]).trigger('change.select2');
+                  $('#valorPersona').val(data["id"]);
+                  $('#person').select2({
+                    disabled: true
+                  });
+                  //console.log(data["id"]);
+                  break;
+                }
+            }
+          }
+      }
     }
   }
 });
@@ -57388,7 +57433,9 @@ var render = function() {
                       2
                     ),
                     _vm._v(" "),
-                    _c("input", { attrs: { type: "hidden", id: "fff" } })
+                    _c("input", {
+                      attrs: { type: "hidden", id: "valorPersona" }
+                    })
                   ])
                 ]),
                 _vm._v(" "),

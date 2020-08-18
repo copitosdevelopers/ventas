@@ -63,25 +63,13 @@ class UserController extends Controller
                 DB::beginTransaction();
 
                 $usuario = User::findOrFail($request->id);
-                $personas = Personas::findOrFail($usuario->id);    
-                
-                $personas->nombres = $request->nombres;
-                $personas->apellidos = $request->apellidos;
-                $personas->tipo_documento = $request->tipo_documento;
-                $personas->nro_documento = $request->nro_documento;
-                $personas->direccion = $request->direccion;
-                $personas->correo = $request->correo;
-                $personas->telefono = $request->telefono;
-                $personas->usuario = \Auth::user()->id;
-                $personas->estado = "1";
-                $personas->save();        
-    
                 
                 $usuario->usuario = $request->usuario;
-                $usuario->password = bcrypt($request->password);
+                if($request->password){
+                   $usuario->password = bcrypt($request->password); 
+                }
                 $usuario->estado ='1';
                 $usuario->idrol= $request->idrol;
-                $usuario->id = $personas->id;
                 $usuario->save();
     
                 DB::commit();
