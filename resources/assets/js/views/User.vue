@@ -309,5 +309,20 @@ export default {
       }
     },
   },
+    },          
+
+    abrirModal(accion, data=[]) {
+      var app = this;
+     $(document).ready(function() {
+       
+        $(".select2").select2();
+        $('#personas').on('select2:select', function (e) {
+            app.idPersona = e.params.data.id;
+            console.log(app.idPersona);
+        }); 
+      }); 
+ 
+    }
+  }
 };
 </script>

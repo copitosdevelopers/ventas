@@ -7,7 +7,36 @@ use App\Articulo;
 use Illuminate\Support\Facades\DB;
 
 class ArticuloController extends Controller
-{
+{   
+    public function buscarArticuloModal(Request $request)
+    {
+       //if(!$request->ajax()) return redirect('/');
+
+       $buscar = $request->buscar;
+      
+       if($buscar==''){
+           $articulos = Articulo::join('categorias','articulos.id_categoria','=','categorias.id')
+           ->select('articulos.id','articulos.id_categoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio','articulos.stock','articulos.descripcion','articulos.estado')
+           ->orderBy('articulos.id','desc')->paginate(10);
+       }
+       else {
+        $articulos = Articulo::join('categorias','articulos.id_categoria','=','categorias.id')
+        ->select('articulos.id','articulos.id_categoria','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','articulos.precio','articulos.stock','articulos.descripcion','articulos.estado')
+        ->where('articulos.nombre','like','%'.$buscar.'%')
+        ->orderBy('articulos.id','desc')->paginate(10);
+       }      
+        return ['articulos' =>$articulos];         
+    }
+
+    public function buscarArticulo(Request $request){
+        if(!$request->ajax()) return redirect('/');
+        $filtro = $request->filtro;
+        $articulos = Articulo::where('codigo','=',$filtro)
+        ->select('id','nombre')->orderBy('nombre','asc')->take(1)->get();
+        return ['articulos'=>$articulos];
+
+    }
+
     public function listarArticulo(Request $request){
         //if(!$request->ajax()) return redirect('/');
         //$categorias = Categoria::where('estado','=','1')
