@@ -6,17 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Listado de Clientes</h1>
+            <h1>Personas</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Almacen</a></li>
-              <li class="breadcrumb-item active">Clientes</li>
-              <li class="breadcrumb-item">
-                <button type="button" class="btn btn-outline-primary btn-sm float-right" data-toggle="modal" data-target="#modal-default" @click="abrirModal('personas','nuevo')">
-                              Nuevo <i class="fas fa-plus"></i>
-                </button>
-              </li>
+              <li class="breadcrumb-item active">Personas</li>
             </ol>
           </div>
         </div>
@@ -29,15 +24,15 @@
         <div class="row">
           <div class="col-12">
             <div class="card">
-             <!-- <div class="card-header">
+              <div class="card-header">
                 <h3 class="card-title">Listado de Personas</h3>
                 <button type="button" class="btn btn-outline-primary btn-sm float-right" data-toggle="modal" data-target="#modal-default" @click="abrirModal('personas','nuevo')">
                               Nuevo <i class="fas fa-plus"></i>
                 </button>
               </div>
-               /.card-header -->
+              <!-- /.card-header -->
               <div class="card-body">
-                <table id="tablita" class="table table-bordered table-hover">
+                <table id="example1" class="table table-bordered table-hover">
                   <thead>
                   <tr>
                     <th>#</th>
@@ -89,32 +84,33 @@
     <!-- /.content -->
 
     <div class="modal fade" id="modal-default">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog">
           <div class="modal-content">
-             <div class="card card-info">
-              <div class="card-header">
-                <h3 class="card-title">{{titulo_modal}}</h3>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form class="form-horizontal">
+            <div class="modal-header">
+              <h4 class="modal-title">{{titulo_modal}}</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
                 <div class="card-body">
                   <div class="form-group row">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Nombres</label>
-                    <div class="col-sm-10">
-                     <input v-model="nombres" type="text" class="form-control" id="nombres" placeholder="Nombres">
+                    <label for="nombres" class="col-sm-3 col-form-label">Nombres</label>
+                    <div class="col-sm-9">
+                    <input v-model="nombres" type="text" class="form-control" id="nombres" placeholder="Nombres">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Apellidos</label>
-                    <div class="col-sm-10">
-                      <input v-model="apellidos" type="text" class="form-control" id="apellidos" placeholder="Apellidos">
+                    <label for="apellidos" class="col-sm-3 col-form-label">Apellidos</label>
+                    <div class="col-sm-9">
+                    <input v-model="apellidos" type="text" class="form-control" id="apellidos" placeholder="Apellidos">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Tipo Documento</label>
-                    <div class="col-sm-10">
-                      <select v-model="tipo_documento" class="form-control" id="tipo_documento">
+                    <label for="tipo_documento" class="col-sm-3 col-form-label">Tipo Documento</label>
+                    <div class="col-sm-9">
+                    <select v-model="tipo_documento" class="form-control" id="tipo_documento">
                       <option value="">[Seleccione Tipo...]</option>
                       <option value="D">DNI</option>
                       <option value="P">Pasaporte</option>
@@ -123,42 +119,36 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Nro Documento</label>
-                    <div class="col-sm-10">
-                      <input v-model="nro_documento" type="number" class="form-control" id="nro_documento" placeholder="Nro Documento">
+                    <label for="nro_documento" class="col-sm-3 col-form-label">Nro Docuemto</label>
+                    <div class="col-sm-9">
+                    <input v-model="nro_documento" type="text" class="form-control" id="nro_documento" placeholder="Nro Docuemnto">
                     </div>
                   </div>
-
                   <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Direccion</label>
-                    <div class="col-sm-10">
-                      <input v-model="direccion" type="text" class="form-control" id="direccion" placeholder="Dirección">
+                    <label for="direccion" class="col-sm-3 col-form-label">Direccion</label>
+                    <div class="col-sm-9">
+                    <input v-model="direccion" type="text" class="form-control" id="direccion" placeholder="Dirección">
                     </div>
                   </div>
-
                   <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Correo</label>
-                    <div class="col-sm-10">
-                       <input v-model="correo" type="email" class="form-control" id="correo" placeholder="Correo">
+                    <label for="correo" class="col-sm-3 col-form-label">Correo</label>
+                    <div class="col-sm-9">
+                    <input v-model="correo" type="text" class="form-control" id="correo" placeholder="Correo">
                     </div>
                   </div>
-
                   <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Telefono</label>
-                    <div class="col-sm-10">
-                      <input v-model="telefono" type="number" class="form-control" id="telefono" placeholder="Telefono">
+                    <label for="telefono" class="col-sm-3 col-form-label">Telefono</label>
+                    <div class="col-sm-9">
+                    <input v-model="telefono" type="text" class="form-control" id="telefono" placeholder="Telefono">
                     </div>
                   </div>
-
-
-                  
-                </div> 
+                </div>
               </form>
-              <div class="modal-footer justify-content-between">
+            </div>
+            <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
               <button v-if="accion==1" type="button" class="btn btn-primary" data-dismiss="modal" @click="nuevaPersonas()">{{titulo_accion}}</button>
               <button v-else type="button" class="btn btn-primary" data-dismiss="modal" @click="actualizarPersonas()">{{titulo_accion}}</button>
-            </div>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -196,41 +186,11 @@ export default {
             .then(response=>{
                 $(document).ready(function(){
                   
+                $("#example1").DataTable({
+                  "responsive": true,
+                  "autoWidth": false,
+                });
                 
-                $("#tablita").DataTable({
-                        language: {
-                            sProcessing: "Procesando...",
-                            sLengthMenu: "Mostrar MENU registros",
-                            sZeroRecords: "No se encontraron resultados",
-                            sEmptyTable: "Ningún dato disponible en esta tabla",
-                            sInfo:
-                            "Mostrando registros del START al END de un total de TOTAL registros",
-                            sInfoEmpty:
-                            "Mostrando registros del 0 al 0 de un total de 0 registros",
-                            sInfoFiltered: "(filtrado de un total de MAX registros)",
-                            sInfoPostFix: "",
-                            sSearch: "Buscar:",
-                            sUrl: "",
-                            sInfoThousands: ",",
-                            sLoadingRecords: "Cargando...",
-                            oPaginate: {
-                            sFirst: "Primero",
-                            sLast: "Último",
-                            sNext: "Siguiente",
-                            sPrevious: "Anterior"
-                            },
-                            oAria: {
-                            sSortAscending:
-                                ": Activar para ordenar la columna de manera ascendente",
-                            sSortDescending:
-                                ": Activar para ordenar la columna de manera descendente"
-                            }
-                        },
-
-                       /*  stateSave: true,
-                        "bDestroy": true */
-                        
-                        });
                 });        
                 this.personas = response.data;
 
@@ -249,9 +209,16 @@ export default {
                 'telefono': this.telefono
             })
             .then(response=>{
-              $("#tablita").dataTable().fnDestroy();
+                $("#example1").dataTable().fnDestroy();
                 this.listarPersonas();
-                     
+                this.nombres='',
+                this.apellidos='',
+                this.tipo_documento='',
+                this.nro_documento='',
+                this.direccion='',
+                this.correo='',
+                this.telefono=''
+                this.validarPersonas();           
             })
             .catch(error=>console.log(error));
         },
@@ -291,7 +258,6 @@ export default {
             }
         },
         actualizarPersonas(){
-            
             let url ='personas/actualizar/';
             axios.put(url+this.id_categoria,{
                 'nombres' : this.nombres,
@@ -303,13 +269,20 @@ export default {
                 'telefono': this.telefono
             })
             .then(response=>{
-              $("#tablita").dataTable().fnDestroy();
+              $("#example1").dataTable().fnDestroy();
               Vue.swal(
                                'Actualizado',
                                'Persona Actualizado con Exito',
                                'success'
                            )
-                this.listarPersonas();           
+                this.listarPersonas();
+                this.nombres='';
+                this.apellidos='';
+                this.tipo_documento='';
+                this.nro_documento='';
+                this.direccion='';
+                this.correo='';
+                this.telefono='';            
             })
             .catch(error=>console.log(error));
              
@@ -328,7 +301,7 @@ export default {
             let url ='personas/desactivar/';
             axios.put(url+id)
             .then(respose=>{
-              $("#tablita").dataTable().fnDestroy();
+              $("#example1").dataTable().fnDestroy();
                 this.listarPersonas();
                 Vue.swal(
                         'Desactivada',
@@ -354,12 +327,12 @@ export default {
             let url ='personas/activar/';
             axios.put(url+id)
             .then(respose=>{
+              $("#example1").dataTable().fnDestroy();
               Vue.swal(
                         'Activado',
                         'Persona Activada con Exito',
                         'success'
                      )
-                $("#tablita").dataTable().fnDestroy();     
                 this.listarPersonas();
             })
             .catch(error=>console.log(error))
